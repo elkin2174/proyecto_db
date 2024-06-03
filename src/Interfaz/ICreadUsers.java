@@ -15,6 +15,11 @@ public class ICreadUsers extends JFrame {
     private JTextField txtCPassword;
     private JButton signUpButton;
     private JButton cancelButton;
+    private JTextField txtId;
+    private JComboBox comboBox1;
+    private JLabel lNit;
+    private JTextField txtTel;
+    private JTextField txtAddress;
 
     public ICreadUsers(){
         super("Create Users");
@@ -33,6 +38,17 @@ public class ICreadUsers extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+
+        comboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(comboBox1.getSelectedItem().toString().equals("Person")){
+                    lNit.setText("ID");
+                } else{
+                    lNit.setText("NIT");
+                };
             }
         });
     }
