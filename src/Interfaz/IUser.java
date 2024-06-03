@@ -21,7 +21,7 @@ public class IUser extends JFrame{
     final static String CARD3 = "card3";
 
     public IUser(){
-        super("Create Users");
+        super("User Interfaz");
         setContentPane(panel1);
         setSize(600, 400);
         setLocationRelativeTo(null);

@@ -15,6 +15,10 @@ public class IClient extends JFrame{
     private JPanel pActiveServices;
     private JPanel pAddNewService;
     private JPanel pPreviousServices;
+    private JMenuBar jmToolBar;
+    private JMenu jmMenu;
+    private JMenuItem jICreadUsers;
+    private JMenuItem jIBrachOffice;
     private CardLayout cardLayout;
 
     final static String CARD1 = "card1";
@@ -22,7 +26,7 @@ public class IClient extends JFrame{
     final static String CARD3 = "card3";
 
     public IClient(){
-        super("Create Users");
+        super("Client Interfaz");
         setContentPane(panel1);
         setSize(600, 400);
         setLocationRelativeTo(null);
@@ -51,6 +55,12 @@ public class IClient extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(cardPanel,CARD3);
+            }
+        });
+        jICreadUsers.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ICreadUsers.main(new String[] {});
             }
         });
     }
