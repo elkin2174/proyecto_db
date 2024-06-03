@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.function.Predicate;
 
 public class IClient extends JFrame{
     private JButton activeServicesButton;
@@ -19,6 +18,14 @@ public class IClient extends JFrame{
     private JMenu jmMenu;
     private JMenuItem jICreadUsers;
     private JMenuItem jIBrachOffice;
+    private JButton closeButton;
+    private JMenuItem jIDeliverys;
+    private JTextField txtOriginCity;
+    private JTextField txtDestinationCity;
+    private JSpinner spNumberPackages;
+    private JSpinner spTotalWeight;
+    private JButton addServiceButton;
+    private JButton cancelButton;
     private CardLayout cardLayout;
 
     final static String CARD1 = "card1";
@@ -46,10 +53,7 @@ public class IClient extends JFrame{
         });
         addNewServiceButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel,CARD2);
-
-            }
+            public void actionPerformed(ActionEvent e) {cardLayout.show(cardPanel,CARD2);}
         });
         previousServicesButton.addActionListener(new ActionListener() {
             @Override
@@ -61,6 +65,28 @@ public class IClient extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 ICreadUsers.main(new String[] {});
+            }
+        });
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Login.main(new String[]{});
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtDestinationCity.setText("");
+                txtOriginCity.setText("");
+                spNumberPackages.setValue(0);
+                spTotalWeight.setValue(0);
+            }
+        });
+        addServiceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

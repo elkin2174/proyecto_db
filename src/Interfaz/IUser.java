@@ -14,6 +14,12 @@ public class IUser extends JFrame{
     private JPanel pActiveServices;
     private JPanel pAddNewServices;
     private JPanel pPreviousServices;
+    private JTextField txtOriginCity;
+    private JTextField txtDestinationCity;
+    private JSpinner spNumberPackages;
+    private JSpinner spTotalWeight;
+    private JButton addServiceButton;
+    private JButton cancelButton;
     private CardLayout cardLayout;
 
     final static String CARD1 = "card1";
@@ -49,6 +55,21 @@ public class IUser extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(cardPanel,CARD3);
+            }
+        });
+        addServiceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtDestinationCity.setText("");
+                txtOriginCity.setText("");
+                spNumberPackages.setValue(0);
+                spTotalWeight.setValue(0);
             }
         });
     }
