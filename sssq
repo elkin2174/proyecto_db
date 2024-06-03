@@ -1,0 +1,26 @@
+[33mcommit 4952f4214ea1a4ea6c11bbb61ee5e1dd6702ef9f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Merge: 1607ac3 c28d6e2
+Author: Juanmaperea <juan.coronado@correounivalle.edu.co>
+Date:   Fri May 24 20:55:52 2024 -0500
+
+    Merge branch 'Juan'
+
+[33mcommit c28d6e24637beb2fa92b3350bd8fbe988a166d5f[m[33m ([m[1;31morigin/Juan[m[33m)[m
+Author: Juanmaperea <juan.coronado@correounivalle.edu.co>
+Date:   Fri May 24 20:55:14 2024 -0500
+
+    Prueba de Merge
+    
+    Esto es para probar el merge entre una rama y el master
+
+[33mcommit 1607ac3d871510bef906359502d7025a0037b8bf[m
+Author: Jfonsecai <juandavidfon@gmail.com>
+Date:   Fri May 24 20:50:14 2024 -0500
+
+    Prueba: añadí un paquete Interfaz
+
+[33mcommit f585b707153badb354702af2d2db5d0fbff3336e[m
+Author: elkin <elkin.21.74@gmail.com>
+Date:   Fri May 24 20:41:29 2024 -0500
+
+    Primer commit
