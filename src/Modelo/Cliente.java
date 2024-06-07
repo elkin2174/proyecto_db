@@ -17,7 +17,11 @@ public class Cliente {
     private List<Sucursal> sucursales;
     private List<UsuarioCliente> usuarios;
 
-    public Cliente() { } // Constructor vacío
+    public Cliente() {
+        mensajeros = new ArrayList<>();
+        sucursales = new ArrayList<>();
+        usuarios = new ArrayList<>();
+    } // Constructor vacío
 
     // Constructor con argumentos
     public Cliente(int id, String tipoCliente, String nombre, String email, String ciudad, String direccion, int telefono) {

@@ -14,7 +14,9 @@ public class UsuarioCliente {
     private Cliente cliente;
     private List<Servicio> serviciosSolicitados;
 
-    public UsuarioCliente() { } // Constructor vacío
+    public UsuarioCliente() {
+        this.serviciosSolicitados = new ArrayList<>();
+    } // Constructor vacío
 
     // Constructor con argumentos
     public UsuarioCliente(String login, String password, String direccion, String email, int telefono, Cliente cliente) {

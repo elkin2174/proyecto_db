@@ -15,16 +15,21 @@ public class Mensajero {
     private List<Servicio> servicios;
     private UsuarioMensajero usuario;
 
-    public Mensajero() { } // Constructor vacío
+    public Mensajero() {
+        clientes = new ArrayList<>();
+        servicios = new ArrayList<>();
+    } // Constructor vacío
 
     // Constructor con argumentos
-    public Mensajero(int id, String name, String email, String direccion, int telefono) {
+    public Mensajero(int id, String name, String email, String direccion, int telefono, UsuarioMensajero user) {
         this.identificacion = id;
         this.nombre = name;
         this.email = email;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.usuario = user;
         clientes = new ArrayList<>();
+        servicios = new ArrayList<>();
     }
 
     public int getIdentificacion() {

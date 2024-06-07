@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.time.*;
 import java.util.List;
@@ -20,10 +21,12 @@ public class Servicio {
     private List<Estado> estados;
 
 
-    public Servicio() { } // Constructor vacío
+    public Servicio() {
+        this.estados = new ArrayList<>();
+    } // Constructor vacío
 
     // Constructor con argumentos
-    public Servicio(int cod, int numPaq, String org, String dest, String tipoTrans, String desc, String ciu) {
+    public Servicio(int cod, int numPaq, String org, String dest, String tipoTrans, String desc, String ciu, Mensajero men, UsuarioCliente user) {
         this.codigo = cod;
         this.numPaquetes = numPaq;
         this.origen = org;
@@ -31,7 +34,10 @@ public class Servicio {
         this.tipoTransporte = tipoTrans;
         this.descripcion = desc;
         this.ciudad = ciu;
+        this.mensajero = men;
+        this.cliente = user;
         this.fechaSolicitud = LocalDateTime.now();
+        this.estados = new ArrayList<>();
     }
 
 

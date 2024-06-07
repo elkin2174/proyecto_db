@@ -5,6 +5,8 @@ import java.time.*;
 public class Estado {
     private LocalDateTime fecha;
     private String estadoActual;
+
+    // Representación de relaciones
     private Servicio servicio;
 
     public Estado() { } // Constructor vacío
