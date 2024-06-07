@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioCliente {
@@ -13,7 +14,9 @@ public class UsuarioCliente {
     private Cliente cliente;
     private List<Servicio> serviciosSolicitados;
 
+    public UsuarioCliente() { } // Constructor vacío
 
+    // Constructor con argumentos
     public UsuarioCliente(String login, String password, String direccion, String email, int telefono, Cliente cliente) {
         this.login = login;
         this.password = password;
@@ -21,6 +24,7 @@ public class UsuarioCliente {
         this.email = email;
         this.telefono = telefono;
         this.cliente = cliente;
+        this.serviciosSolicitados = new ArrayList<>();
     }
 
     public String getLogin() {

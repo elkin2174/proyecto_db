@@ -17,6 +17,9 @@ public class Cliente {
     private List<Sucursal> sucursales;
     private List<UsuarioCliente> usuarios;
 
+    public Cliente() { } // Constructor vacío
+
+    // Constructor con argumentos
     public Cliente(int id, String tipoCliente, String nombre, String email, String ciudad, String direccion, int telefono) {
         this.identificacion = id;
         this.tipoCliente = tipoCliente;

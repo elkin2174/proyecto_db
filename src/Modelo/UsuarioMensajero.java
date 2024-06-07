@@ -5,6 +5,9 @@ public class UsuarioMensajero {
     private String password;
     private Mensajero mensajero;
 
+    public UsuarioMensajero() { } // Constructor vacío
+
+    // Constructor con argumentos
     public UsuarioMensajero(String login, String password, Mensajero mensajero) {
         this.login = login;
         this.password = password;

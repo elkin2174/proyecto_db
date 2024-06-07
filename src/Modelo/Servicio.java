@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.Date;
+import java.time.*;
 import java.util.List;
 
 public class Servicio {
@@ -11,7 +12,7 @@ public class Servicio {
     private String tipoTransporte;
     private String descripcion;
     private String ciudad;
-    private Date fechaSolicitud;
+    private LocalDateTime fechaSolicitud;
 
     // Representación de las relaciones
     private Mensajero mensajero;
@@ -19,8 +20,18 @@ public class Servicio {
     private List<Estado> estados;
 
 
-    public Servicio() {
+    public Servicio() { } // Constructor vacío
 
+    // Constructor con argumentos
+    public Servicio(int cod, int numPaq, String org, String dest, String tipoTrans, String desc, String ciu) {
+        this.codigo = cod;
+        this.numPaquetes = numPaq;
+        this.origen = org;
+        this.destino = dest;
+        this.tipoTransporte = tipoTrans;
+        this.descripcion = desc;
+        this.ciudad = ciu;
+        this.fechaSolicitud = LocalDateTime.now();
     }
 
 
@@ -80,11 +91,11 @@ public class Servicio {
         this.ciudad = ciudad;
     }
 
-    public Date getFechaSolicitud() {
+    public LocalDateTime getFechaSolicitud() {
         return fechaSolicitud;
     }
 
-    public void setFechaSolicitud(Date fechaSolicitud) {
+    public void setFechaSolicitud(LocalDateTime fechaSolicitud) {
         this.fechaSolicitud = fechaSolicitud;
     }
 

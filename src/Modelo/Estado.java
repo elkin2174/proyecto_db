@@ -1,16 +1,19 @@
 package Modelo;
 
-import java.util.Date;
+import java.time.*;
 
 public class Estado {
-    private Date fecha;
+    private LocalDateTime fecha;
     private String estadoActual;
     private Servicio servicio;
 
-    public Estado(Date fecha, String estadoActual, Servicio servicio) {
+    public Estado() { } // Constructor vacío
+
+    // Constructor con argumentos
+    public Estado(String estadoActual, Servicio servicio) {
         this.estadoActual = estadoActual;
-        this.fecha = fecha;
         this.servicio = servicio;
+        this.fecha = LocalDateTime.now();
     }
 
     public Servicio getServicio() {
@@ -29,11 +32,11 @@ public class Estado {
         this.estadoActual = estadoActual;
     }
 
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
 }

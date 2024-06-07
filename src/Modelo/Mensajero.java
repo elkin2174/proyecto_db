@@ -15,7 +15,9 @@ public class Mensajero {
     private List<Servicio> servicios;
     private UsuarioMensajero usuario;
 
+    public Mensajero() { } // Constructor vacío
 
+    // Constructor con argumentos
     public Mensajero(int id, String name, String email, String direccion, int telefono) {
         this.identificacion = id;
         this.nombre = name;

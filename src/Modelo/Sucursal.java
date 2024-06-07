@@ -9,7 +9,9 @@ public class Sucursal {
     // Representación de las relaciones
     private Cliente cliente;
 
+    public Sucursal() { } // Constructor vacío
 
+    // Constructor con argumentos
     public Sucursal(int numSucursal, String nombre, String direccion, int telefono, Cliente cliente) {
         this.cliente = cliente;
         this.numSucursal = numSucursal;
