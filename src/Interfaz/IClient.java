@@ -11,9 +11,9 @@ public class IClient extends JFrame{
     private JButton addNewServiceButton;
     private JButton previousServicesButton;
     private JPanel cardPanel;
-    private JPanel pActiveServices;
+    private JScrollPane spActiveServices;
     private JPanel pAddNewService;
-    private JPanel pPreviousServices;
+    private JScrollPane spPreviousServices;
     private JMenuBar jmToolBar;
     private JMenu jmMenu;
     private JMenuItem jICreadUsers;
@@ -26,6 +26,9 @@ public class IClient extends JFrame{
     private JSpinner spTotalWeight;
     private JButton addServiceButton;
     private JButton cancelButton;
+    private JTextArea txtDescription;
+    private JPanel pActiveServices;
+    private JPanel pPreviousServices;
     private CardLayout cardLayout;
 
     final static String CARD1 = "card1";
@@ -38,10 +41,19 @@ public class IClient extends JFrame{
         setSize(600, 400);
         setLocationRelativeTo(null);
 
+        cardLayout = (CardLayout) cardPanel.getLayout();
+        pActiveServices.setLayout(new BoxLayout(pActiveServices, BoxLayout.Y_AXIS));
+        pPreviousServices.setLayout(new BoxLayout(pPreviousServices, BoxLayout.Y_AXIS));
+//tEST
+        for (int i = 0; i < 3; i++) {
+            addPanelActiveServices();
+        }
+        for (int i = 0; i < 2; i++) {
+            addPanelPreviousServices();
+        }
 
-        cardPanel.add(pActiveServices,CARD1);
-        cardPanel.add(pAddNewService,CARD2);
-        cardPanel.add(pPreviousServices,CARD3);
+        spActiveServices.setViewportView(pActiveServices);
+        spPreviousServices.setViewportView(pPreviousServices);
         cardLayout = (CardLayout) cardPanel.getLayout();
 
 
@@ -89,6 +101,21 @@ public class IClient extends JFrame{
 
             }
         });
+    }
+
+    /**
+     * @author Elkin Tovar
+     * @TODO
+     * Añade los el resumen de los servicios a el scroll panel spPanelActiveServices
+     */
+    private void addPanelActiveServices() {
+        JPanel jp = new IPServices("xd","xd","xd","xd","xd","xd","xd").getPanel1();
+        pActiveServices.add(jp);
+
+    }
+    private void addPanelPreviousServices(){
+        JPanel jp = new IPServices("Hola","Prueba","xd","xd","xd","xd","xd").getPanel1();
+        pPreviousServices.add(jp);
     }
 
     public static void main(String[] args) {

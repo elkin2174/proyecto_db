@@ -39,18 +39,25 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="6dd94" binding="pActiveServices" layout-manager="BorderLayout" hgap="0" vgap="0">
+          <scrollpane id="7f6f8" binding="spActiveServices">
             <constraints>
-              <card name="Card1"/>
+              <card name="card1"/>
             </constraints>
             <properties/>
             <border type="none"/>
-            <children/>
-          </grid>
-          <grid id="3c110" binding="pAddNewServices" layout-manager="GridLayoutManager" row-count="5" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <children>
+              <grid id="6dd94" binding="pActiveServices" layout-manager="GridBagLayout">
+                <constraints/>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </scrollpane>
+          <grid id="3c110" binding="pAddNewServices" layout-manager="GridLayoutManager" row-count="6" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <card name="Card2"/>
+              <card name="card2"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -117,7 +124,7 @@
               </component>
               <component id="c0e2" class="javax.swing.JButton" binding="addServiceButton" default-binding="true">
                 <constraints>
-                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Add Service"/>
@@ -130,7 +137,7 @@
               </hspacer>
               <component id="79f07" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
                 <constraints>
-                  <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="Cancel"/>
@@ -146,23 +153,39 @@
                   <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
-            </children>
-          </grid>
-          <grid id="e58d5" binding="pPreviousServices" layout-manager="BorderLayout" hgap="0" vgap="0">
-            <constraints>
-              <card name="Card3"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="425eb" class="javax.swing.JLabel">
-                <constraints border-constraint="Center"/>
+              <component id="fc9d" class="javax.swing.JTextArea" binding="txtDescription">
+                <constraints>
+                  <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="d14f8" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
                 <properties>
-                  <text value="SDFSDF"/>
+                  <text value="Description"/>
                 </properties>
               </component>
             </children>
           </grid>
+          <scrollpane id="7f64c" binding="spPreviousServices">
+            <constraints>
+              <card name="card3"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="e58d5" binding="pPreviousServices" layout-manager="GridBagLayout">
+                <constraints/>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </scrollpane>
         </children>
       </grid>
     </children>
