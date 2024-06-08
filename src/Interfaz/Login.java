@@ -55,6 +55,11 @@ public class Login  extends JFrame{
                 System.exit(0);
             }
         });
+        bntSingUpDelivery.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {ICreateDelivery.main(new String[]{});
+            }
+        });
     }
 
     public static void main(String[] args) {
