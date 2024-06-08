@@ -1,6 +1,9 @@
 package Interfaz;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,11 +32,17 @@ public class IClient extends JFrame{
     private JTextArea txtDescription;
     private JPanel pActiveServices;
     private JPanel pPreviousServices;
+    private JTable table1;
+    private JComboBox comboBox1;
+    private JButton associateButton;
+    private JPanel pAsociatePanel;
     private CardLayout cardLayout;
 
     final static String CARD1 = "card1";
     final static String CARD2 = "card2";
     final static String CARD3 = "card3";
+
+    private DefaultTableModel model;
 
     public IClient(){
         super("Client Interfaz");
@@ -44,6 +53,21 @@ public class IClient extends JFrame{
         cardLayout = (CardLayout) cardPanel.getLayout();
         pActiveServices.setLayout(new BoxLayout(pActiveServices, BoxLayout.Y_AXIS));
         pPreviousServices.setLayout(new BoxLayout(pPreviousServices, BoxLayout.Y_AXIS));
+
+        // Crear un DefaultTableModel y añadir las columnas
+        model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Nombre");
+        table1.setModel(model);
+
+        TableColumnModel columnModel = table1.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(30);
+        columnModel.getColumn(1).setPreferredWidth(100);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        columnModel.getColumn(0).setCellRenderer(centerRenderer);
 //tEST
         for (int i = 0; i < 3; i++) {
             addPanelActiveServices();
@@ -75,9 +99,7 @@ public class IClient extends JFrame{
         });
         jICreadUsers.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                ICreateClient.main(new String[] {});
-            }
+            public void actionPerformed(ActionEvent e) {ICreateUserClient.main(new String[] {});}
         });
         closeButton.addActionListener(new ActionListener() {
             @Override
@@ -100,6 +122,17 @@ public class IClient extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
             }
+        });
+        associateButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        jIDeliverys.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {cardLayout.show(cardPanel,"card4");}
         });
     }
 
