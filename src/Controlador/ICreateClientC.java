@@ -3,6 +3,7 @@ package Controlador;
 import AccesoADatos.*;
 import Modelo.Cliente;
 import Modelo.UsuarioCliente;
+import org.postgresql.util.PSQLException;
 
 import javax.swing.*;
 import java.util.regex.Pattern;
@@ -28,7 +29,7 @@ public class ICreateClientC {
         return matcher.matches();
     }
 
-    public static void createCient(JTextField tfId, JComboBox cbTipoCliente, JTextField tfNombre, JTextField tfApellido, JTextField tfEmail, JTextField tfCiudad, JTextField tfDireccion, JTextField tfTelefono) {
+    public static boolean createClient(JTextField tfId, JComboBox cbTipoCliente, JTextField tfNombre, JTextField tfApellido, JTextField tfEmail, JTextField tfCiudad, JTextField tfDireccion, JTextField tfTelefono, JPasswordField tfPassword, JPasswordField tfCPassword, JTextField tfUsername) {
         // Obtener toda la información de los campos
         String id = tfId.getText();
         String tipoCliente = cbTipoCliente.getSelectedItem().toString();
@@ -37,6 +38,9 @@ public class ICreateClientC {
         String ciudad = tfCiudad.getText();
         String direccion = tfDireccion.getText();
         String telefono = tfTelefono.getText();
+        String password = String.valueOf(tfPassword.getPassword());
+        String CPassword = String.valueOf(tfCPassword.getPassword());
+        String username = tfUsername.getText();
 
         // Vaciar campos
         tfId.setText("");
@@ -46,16 +50,45 @@ public class ICreateClientC {
         tfCiudad.setText("");
         tfDireccion.setText("");
         tfTelefono.setText("");
+        tfPassword.setText("");
+        tfCPassword.setText("");
+        tfUsername.setText("");
 
         // Verificaciones
-        if (id == "") tfId.setText("Es obligatorio poner la identificación");
-        if (!isValidEmail(email)) tfEmail.setText("El email no corresponde a un formato de email válido");
-        if (!isValidPhoneNumber(telefono)) tfTelefono.setText("Número de teléfono inválido");
+        if (id == "") {
+            tfId.setText("Es obligatorio poner la identificación");
+            return false;
+        }
+        if (!isValidEmail(email)) {
+            tfEmail.setText("El email no corresponde a un formato de email válido");
+            return false;
+        }
+        if (!isValidPhoneNumber(telefono)) {
+            tfTelefono.setText("Número de teléfono inválido");
+            return false;
+        }
+        if (!CPassword.equals(password)) {
+            tfPassword.setText("Contrasenas no coinciden");
+            return false;
+        }
         else {
             // Insertar cliente
             Cliente cliente = new Cliente(id, tipoCliente, nombre, email, ciudad, direccion, telefono);
-            clienteDAO.insert(cliente);
-            tfId.setText("Cliente creado exitosamente");
+            if (clienteDAO.insert(cliente)==0) {
+                JOptionPane.showMessageDialog(null, "Cliente creado exitosamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe un cliente con esa identificación");
+                return false;
+            }
+
+            //Insertar usuario
+            UsuarioCliente user = new UsuarioCliente(username, password, direccion, email, telefono, cliente);
+            if (usuarioClienteDAO.insert(user)==1) {
+                JOptionPane.showMessageDialog(null, "Username ya existe, debe crear uno nuevo");
+                return false;
+            }
+
+            return true;
         }
     }
 

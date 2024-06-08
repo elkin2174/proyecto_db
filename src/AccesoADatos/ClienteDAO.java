@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Modelo.Cliente;
+import org.postgresql.util.PSQLException;
 
 public class ClienteDAO {
     private static final String INSERT_SQL = "INSERT INTO cliente (identificacion, tipo_cliente, nombre, email, ciudad, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -23,7 +24,7 @@ public class ClienteDAO {
      *
      * @param cliente
      */
-    public void insert(Cliente cliente) {
+    public int insert(Cliente cliente) {
         try (Connection conn = conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
             System.out.println("Id: " + cliente.getIdentificacion() + "\n" +
@@ -40,8 +41,11 @@ public class ClienteDAO {
             stmt.setString(6, cliente.getDireccion());
             stmt.setString(7, cliente.getTelefono());
             stmt.executeUpdate();
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println(e.getErrorCode());
+            return 1;
         }
     }
 
@@ -103,8 +107,8 @@ public class ClienteDAO {
             stmt.setString(3, cliente.getEmail());
             stmt.setString(4, cliente.getCiudad());
             stmt.setString(5, cliente.getDireccion());
-            stmt.setString(6, cliente.getTelefono()+"");
-            stmt.setString(7, cliente.getIdentificacion()+"");
+            stmt.setString(6, cliente.getTelefono());
+            stmt.setString(7, cliente.getIdentificacion());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

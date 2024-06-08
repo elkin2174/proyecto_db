@@ -34,7 +34,9 @@ public class ICreateClient extends JFrame {
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ICreateClientC.createCient(txtId, comboBox1, txtFirstName, txtLastName, txtEmail, txtCity, txtAddress, txtTel);
+                if (ICreateClientC.createClient(txtId, comboBox1, txtFirstName, txtLastName, txtEmail, txtCity, txtAddress, txtTel, txtPassword, txtCPassword, txtUsername)) {
+                    dispose();
+                }
             }
         });
         cancelButton.addActionListener(new ActionListener() {

@@ -18,18 +18,21 @@ public class UsuarioClienteDAO {
         this.dbConnection = new DBConnection();
     }
 
-    public void insert(UsuarioCliente usuarioCliente) {
+    public int insert(UsuarioCliente usuarioCliente) {
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
             stmt.setString(1, usuarioCliente.getLogin());
             stmt.setString(2, usuarioCliente.getPassword());
             stmt.setString(3, usuarioCliente.getDireccion());
             stmt.setString(4, usuarioCliente.getEmail());
-            stmt.setString(5, usuarioCliente.getTelefono()+"");
-            stmt.setString(6, usuarioCliente.getCliente().getIdentificacion()+"");
+            stmt.setString(5, usuarioCliente.getTelefono());
+            stmt.setString(6, usuarioCliente.getCliente().getIdentificacion());
             stmt.executeUpdate();
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println(e.getErrorCode());
+            return 1;
         }
     }
 
@@ -45,7 +48,7 @@ public class UsuarioClienteDAO {
                     usuarioCliente.setPassword(rs.getString("contrasena"));
                     usuarioCliente.setDireccion(rs.getString("direccion"));
                     usuarioCliente.setEmail(rs.getString("email"));
-                    usuarioCliente.setTelefono(Integer.parseInt(rs.getString("telefono")));
+                    usuarioCliente.setTelefono(rs.getString("telefono"));
                 }
             }
         } catch (SQLException e) {
@@ -65,7 +68,7 @@ public class UsuarioClienteDAO {
                 usuarioCliente.setPassword(rs.getString("contraseña"));
                 usuarioCliente.setDireccion(rs.getString("direccion"));
                 usuarioCliente.setEmail(rs.getString("email"));
-                usuarioCliente.setTelefono(Integer.parseInt(rs.getString("telefono")));
+                usuarioCliente.setTelefono(rs.getString("telefono"));
                 usuariosCliente.add(usuarioCliente);
             }
         } catch (SQLException e) {
@@ -80,8 +83,8 @@ public class UsuarioClienteDAO {
             stmt.setString(1, usuarioCliente.getPassword());
             stmt.setString(2, usuarioCliente.getDireccion());
             stmt.setString(3, usuarioCliente.getEmail());
-            stmt.setString(4, usuarioCliente.getTelefono()+"");
-            stmt.setString(5, usuarioCliente.getCliente().getIdentificacion()+"");
+            stmt.setString(4, usuarioCliente.getTelefono());
+            stmt.setString(5, usuarioCliente.getCliente().getIdentificacion());
             stmt.setString(6, usuarioCliente.getLogin());
             stmt.executeUpdate();
         } catch (SQLException e) {

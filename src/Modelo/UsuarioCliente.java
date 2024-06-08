@@ -8,7 +8,7 @@ public class UsuarioCliente {
     private String password;
     private String direccion;
     private String email;
-    private int telefono;
+    private String telefono;
 
     // Representación de las relaciones
     private Cliente cliente;
@@ -19,7 +19,7 @@ public class UsuarioCliente {
     } // Constructor vacío
 
     // Constructor con argumentos
-    public UsuarioCliente(String login, String password, String direccion, String email, int telefono, Cliente cliente) {
+    public UsuarioCliente(String login, String password, String direccion, String email, String telefono, Cliente cliente) {
         this.login = login;
         this.password = password;
         this.direccion = direccion;
@@ -61,11 +61,11 @@ public class UsuarioCliente {
         this.email = email;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
