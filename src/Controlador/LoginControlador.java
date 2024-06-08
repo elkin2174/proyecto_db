@@ -1,4 +1,4 @@
-package Controladores;
+package Controlador;
 
 import AccesoADatos.UsuarioClienteDAO;
 import Interfaz.IClient;

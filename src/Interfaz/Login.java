@@ -1,12 +1,10 @@
 package Interfaz;
 
-import Controladores.LoginControlador;
-import Modelo.UsuarioCliente;
+import Controlador.LoginControlador;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class Login  extends JFrame{
     private JPanel panel1;
