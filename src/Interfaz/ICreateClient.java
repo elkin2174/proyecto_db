@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ICreadUsers extends JFrame {
+public class ICreateClient extends JFrame {
     private JPanel panel1;
     private JTextField txtFirstName;
     private JTextField txtLastName;
@@ -20,8 +20,9 @@ public class ICreadUsers extends JFrame {
     private JLabel lNit;
     private JTextField txtTel;
     private JTextField txtAddress;
+    private JTextField txtUsername;
 
-    public ICreadUsers(){
+    public ICreateClient(){
         super("Create Users");
         setContentPane(panel1);
         setSize(600, 400);
@@ -55,8 +56,8 @@ public class ICreadUsers extends JFrame {
 
     public static void main(String[] args) {
 
-        ICreadUsers iCreadUsers = new ICreadUsers();
-        iCreadUsers.setVisible(true);
+        ICreateClient iCreateClient = new ICreateClient();
+        iCreateClient.setVisible(true);
 
     }
 }

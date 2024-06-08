@@ -31,7 +31,7 @@ public class Login  extends JFrame{
         bntSingUpClient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ICreadUsers.main(new String[]{});
+                ICreateClient.main(new String[]{});
             }
         });
 

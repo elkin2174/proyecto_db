@@ -76,7 +76,7 @@ public class IClient extends JFrame{
         jICreadUsers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ICreadUsers.main(new String[] {});
+                ICreateClient.main(new String[] {});
             }
         });
         closeButton.addActionListener(new ActionListener() {
