@@ -13,8 +13,6 @@ public class ICreateClient extends JFrame {
     private JTextField txtCountry;
     private JTextField txtCity;
     private JTextField txtEmail;
-    private JTextField txtPassword;
-    private JTextField txtCPassword;
     private JButton signUpButton;
     private JButton cancelButton;
     private JTextField txtId;
@@ -23,6 +21,8 @@ public class ICreateClient extends JFrame {
     private JTextField txtTel;
     private JTextField txtAddress;
     private JTextField txtUsername;
+    private JPasswordField txtPassword;
+    private JPasswordField txtCPassword;
 
     public ICreateClient(){
         super("Create Users");
