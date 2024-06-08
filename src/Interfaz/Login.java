@@ -22,6 +22,7 @@ public class Login  extends JFrame{
     private JButton bntSingUpClient;
     private JButton bntSingUpDelivery;
     private JLabel clientErrorMsg;
+    private JLabel deliveryErrorMsg;
 
     public Login(){
         super("Login");
@@ -33,7 +34,17 @@ public class Login  extends JFrame{
         bntSingInClient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (LoginControlador.validateLogin(txClient, psClient, clientErrorMsg)) {
+                if (LoginControlador.validateLoginClient(txClient, psClient, clientErrorMsg)) {
+                    dispose();
+                    IClient.main(new String[]{});
+                }
+            }
+        });
+
+        bntSingDelivery.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (LoginControlador.validateLoginMensajero(txtDelivery, psDelivery, deliveryErrorMsg)) {
                     dispose();
                     IClient.main(new String[]{});
                 }
