@@ -24,7 +24,7 @@ public class DBConnection {
         }
     }
 
-    public Connection getConnetion(){
+    public Connection getConnection(){
         if (conexion == null) return this.openConnection();
         else return conexion;
     }

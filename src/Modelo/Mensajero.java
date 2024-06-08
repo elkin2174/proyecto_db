@@ -10,7 +10,7 @@ public class Mensajero {
     private String direccion;
     private int telefono;
 
-    // Representación de las realciones
+    // Representación de las relaciones
     private List<Cliente> clientes;
     private List<Servicio> servicios;
     private UsuarioMensajero usuario;
