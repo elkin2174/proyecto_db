@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioClienteDAO {
-    private static final String INSERT_SQL = "INSERT INTO usuario_cliente (login, contraseña, direccion, email, telefono, id_cliente) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_SQL = "INSERT INTO usuario_cliente (login, contrasena, direccion, email, telefono, id_cliente) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM usuario_cliente WHERE login = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM usuario_cliente";
-    private static final String UPDATE_SQL = "UPDATE usuario_cliente SET contraseña = ?, direccion = ?, email = ?, telefono = ?, id_cliente = ? WHERE login = ?";
+    private static final String UPDATE_SQL = "UPDATE usuario_cliente SET contrasena = ?, direccion = ?, email = ?, telefono = ?, id_cliente = ? WHERE login = ?";
     private static final String DELETE_SQL = "DELETE FROM usuario_cliente WHERE login = ?";
 
     private DBConnection dbConnection;
@@ -42,7 +42,7 @@ public class UsuarioClienteDAO {
                 if (rs.next()) {
                     usuarioCliente = new UsuarioCliente();
                     usuarioCliente.setLogin(rs.getString("login"));
-                    usuarioCliente.setPassword(rs.getString("contraseña"));
+                    usuarioCliente.setPassword(rs.getString("contrasena"));
                     usuarioCliente.setDireccion(rs.getString("direccion"));
                     usuarioCliente.setEmail(rs.getString("email"));
                     usuarioCliente.setTelefono(Integer.parseInt(rs.getString("telefono")));

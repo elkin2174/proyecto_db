@@ -1,8 +1,12 @@
 package Interfaz;
 
+import Controladores.LoginControlador;
+import Modelo.UsuarioCliente;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class Login  extends JFrame{
     private JPanel panel1;
@@ -19,6 +23,7 @@ public class Login  extends JFrame{
     private JButton bntExit;
     private JButton bntSingUpClient;
     private JButton bntSingUpDelivery;
+    private JLabel clientErrorMsg;
 
     public Login(){
         super("Login");
@@ -27,6 +32,15 @@ public class Login  extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        bntSingInClient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (LoginControlador.validateLogin(txClient, psClient, clientErrorMsg)) {
+                    dispose();
+                    IClient.main(new String[]{});
+                }
+            }
+        });
 
         bntSingUpClient.addActionListener(new ActionListener() {
             @Override
