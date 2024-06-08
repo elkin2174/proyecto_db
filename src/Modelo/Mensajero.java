@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mensajero {
-    private int identificacion;
+    private String identificacion;
     private String nombre;
     private String email;
     private String direccion;
-    private int telefono;
+    private String telefono;
 
     // Representación de las relaciones
     private List<Cliente> clientes;
@@ -21,7 +21,7 @@ public class Mensajero {
     } // Constructor vacío
 
     // Constructor con argumentos
-    public Mensajero(int id, String name, String email, String direccion, int telefono, UsuarioMensajero user) {
+    public Mensajero(String id, String name, String email, String direccion, String telefono, UsuarioMensajero user) {
         this.identificacion = id;
         this.nombre = name;
         this.email = email;
@@ -32,11 +32,11 @@ public class Mensajero {
         servicios = new ArrayList<>();
     }
 
-    public int getIdentificacion() {
+    public String getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(int identificacion) {
+    public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
 
@@ -64,11 +64,11 @@ public class Mensajero {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

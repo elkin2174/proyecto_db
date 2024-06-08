@@ -40,11 +40,11 @@ public class MensajeroDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     mensajero = new Mensajero();
-                    mensajero.setIdentificacion(Integer.parseInt(rs.getString("identificacion")));
+                    mensajero.setIdentificacion(rs.getString("identificacion"));
                     mensajero.setNombre(rs.getString("nombre"));
                     mensajero.setEmail(rs.getString("email"));
                     mensajero.setDireccion(rs.getString("direccion"));
-                    mensajero.setTelefono(Integer.parseInt(rs.getString("telefono")));
+                    mensajero.setTelefono(rs.getString("telefono"));
                 }
             }
         } catch (SQLException e) {
@@ -60,11 +60,11 @@ public class MensajeroDAO {
              ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
             while (rs.next()) {
                 Mensajero mensajero = new Mensajero();
-                mensajero.setIdentificacion(Integer.parseInt(rs.getString("identificacion")));
+                mensajero.setIdentificacion(rs.getString("identificacion"));
                 mensajero.setNombre(rs.getString("nombre"));
                 mensajero.setEmail(rs.getString("email"));
                 mensajero.setDireccion(rs.getString("direccion"));
-                mensajero.setTelefono(Integer.parseInt(rs.getString("telefono")));
+                mensajero.setTelefono(rs.getString("telefono"));
                 mensajeros.add(mensajero);
             }
         } catch (SQLException e) {

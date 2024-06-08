@@ -26,13 +26,19 @@ public class ClienteDAO {
     public void insert(Cliente cliente) {
         try (Connection conn = conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
-            stmt.setString(1, cliente.getIdentificacion()+"");
+            System.out.println("Id: " + cliente.getIdentificacion() + "\n" +
+            "TipoCliente: " + cliente.getTipoCliente() + "\n" +
+            "Nombre: " + cliente.getNombre() + "\n" +
+            "Email: " + cliente.getEmail() + "\n" +
+            "Ciudad: ");
+
+            stmt.setString(1, cliente.getIdentificacion());
             stmt.setString(2, cliente.getTipoCliente());
             stmt.setString(3, cliente.getNombre());
             stmt.setString(4, cliente.getEmail());
             stmt.setString(5, cliente.getCiudad());
             stmt.setString(6, cliente.getDireccion());
-            stmt.setString(7, cliente.getTelefono()+"");
+            stmt.setString(7, cliente.getTelefono());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,13 +58,13 @@ public class ClienteDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     cliente = new Cliente();
-                    cliente.setIdentificacion(Integer.parseInt(rs.getString("identificacion")));
+                    cliente.setIdentificacion(rs.getString("identificacion"));
                     cliente.setTipoCliente(rs.getString("tipo_cliente"));
                     cliente.setNombre(rs.getString("nombre"));
                     cliente.setEmail(rs.getString("email"));
                     cliente.setCiudad(rs.getString("ciudad"));
                     cliente.setDireccion(rs.getString("direccion"));
-                    cliente.setTelefono(Integer.parseInt(rs.getString("telefono")));
+                    cliente.setTelefono(rs.getString("telefono"));
                 }
             }
         } catch (SQLException e) {
@@ -74,13 +80,13 @@ public class ClienteDAO {
              ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
             while (rs.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setIdentificacion(Integer.parseInt(rs.getString("identificacion")));
+                cliente.setIdentificacion(rs.getString("identificacion"));
                 cliente.setTipoCliente(rs.getString("tipo_cliente"));
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setEmail(rs.getString("email"));
                 cliente.setCiudad(rs.getString("ciudad"));
                 cliente.setDireccion(rs.getString("direccion"));
-                cliente.setTelefono(Integer.parseInt(rs.getString("telefono")));
+                cliente.setTelefono(rs.getString("telefono"));
                 clientes.add(cliente);
             }
         } catch (SQLException e) {

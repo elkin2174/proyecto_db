@@ -1,2 +1,3 @@
-package Interfaz;public class ICreateUserClient {
+package Interfaz;
+public class ICreateUserClient {
 }

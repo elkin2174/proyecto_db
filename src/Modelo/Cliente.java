@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
-    private int identificacion;
+    private String identificacion;
     private String tipoCliente;
     private String nombre;
     private String email;
     private String ciudad;
     private String direccion;
-    private int telefono;
+    private String telefono;
 
     // Representación de las relaciones
     private List<Mensajero> mensajeros;
@@ -24,7 +24,7 @@ public class Cliente {
     } // Constructor vacío
 
     // Constructor con argumentos
-    public Cliente(int id, String tipoCliente, String nombre, String email, String ciudad, String direccion, int telefono) {
+    public Cliente(String id, String tipoCliente, String nombre, String email, String ciudad, String direccion, String telefono) {
         this.identificacion = id;
         this.tipoCliente = tipoCliente;
         this.nombre = nombre;
@@ -38,11 +38,11 @@ public class Cliente {
     }
 
 
-    public int getIdentificacion() {
+    public String getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(int identificacion) {
+    public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
 
@@ -87,11 +87,11 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

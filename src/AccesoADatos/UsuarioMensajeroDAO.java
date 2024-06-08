@@ -24,7 +24,7 @@ public class UsuarioMensajeroDAO {
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
             stmt.setString(1, usuarioMensajero.getLogin());
             stmt.setString(2, usuarioMensajero.getPassword());
-            stmt.setString(3, usuarioMensajero.getMensajero().getIdentificacion()+"");
+            stmt.setString(3, usuarioMensajero.getMensajero().getIdentificacion());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class UsuarioMensajeroDAO {
                     usuarioMensajero = new UsuarioMensajero();
                     usuarioMensajero.setLogin(rs.getString("login"));
                     usuarioMensajero.setPassword(rs.getString("contraseña"));
-                    mensajero.setIdentificacion(Integer.parseInt(rs.getString("id_mensajero")));
+                    mensajero.setIdentificacion(rs.getString("id_mensajero"));
                     usuarioMensajero.setMensajero(mensajero);
                 }
             }
@@ -62,7 +62,7 @@ public class UsuarioMensajeroDAO {
                 UsuarioMensajero usuarioMensajero = new UsuarioMensajero();
                 usuarioMensajero.setLogin(rs.getString("login"));
                 usuarioMensajero.setPassword(rs.getString("contraseña"));
-                mensajero.setIdentificacion(Integer.parseInt(rs.getString("id_mensajero")));
+                mensajero.setIdentificacion(rs.getString("id_mensajero"));
                 usuarioMensajero.setMensajero(mensajero);
                 usuariosMensajero.add(usuarioMensajero);
             }
@@ -76,7 +76,7 @@ public class UsuarioMensajeroDAO {
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
             stmt.setString(1, usuarioMensajero.getPassword());
-            stmt.setString(2, usuarioMensajero.getMensajero().getIdentificacion()+"");
+            stmt.setString(2, usuarioMensajero.getMensajero().getIdentificacion());
             stmt.setString(3, usuarioMensajero.getLogin());
             stmt.executeUpdate();
         } catch (SQLException e) {
