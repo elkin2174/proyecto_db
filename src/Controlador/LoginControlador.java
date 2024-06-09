@@ -2,12 +2,17 @@ package Controlador;
 
 import AccesoADatos.UsuarioClienteDAO;
 import AccesoADatos.UsuarioMensajeroDAO;
+import Modelo.Cliente;
 import Modelo.UsuarioCliente;
 import Modelo.UsuarioMensajero;
 
 import javax.swing.*;
 
 public class LoginControlador {
+
+    private static UsuarioCliente usuarioContext;
+    private static UsuarioMensajero mensajeroContext;
+
 
     // Retorna un booleano de si login se hizo correctamente y modifica el mensaje de error
     public static boolean validateLoginClient(JTextField username, JPasswordField password, JLabel errorMsg) {
@@ -29,6 +34,7 @@ public class LoginControlador {
             return false;
         }
         //Aquí se debe guardar el usuario en un estado de la aplicación
+        usuarioContext = user;
         return true;
     }
 
@@ -53,6 +59,23 @@ public class LoginControlador {
             return false;
         }
         //Aquí se debe guardar el usuario en un estado de la aplicación
+        mensajeroContext = user;
         return true;
+    }
+
+    public static UsuarioCliente getUsuarioContext() {
+        return usuarioContext;
+    }
+
+    public static void setUsuarioContext(UsuarioCliente usuarioContext) {
+        LoginControlador.usuarioContext = usuarioContext;
+    }
+
+    public static UsuarioMensajero getMensajeroContext() {
+        return mensajeroContext;
+    }
+
+    public static void setMensajeroContext(UsuarioMensajero mensajeroContext) {
+        LoginControlador.mensajeroContext = mensajeroContext;
     }
 }

@@ -1,5 +1,8 @@
 package Interfaz;
 
+import Controlador.IServiceC;
+import Controlador.LoginControlador;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -107,6 +110,7 @@ public class IClient extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 Login.main(new String[]{});
+                LoginControlador.setUsuarioContext(null);
             }
         });
         cancelButton.addActionListener(new ActionListener() {
@@ -121,7 +125,8 @@ public class IClient extends JFrame{
         addServiceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                IServiceC iServiceC = new IServiceC();
+                iServiceC.addService(txtOriginCity,txtDestinationCity,spNumberPackages,spTotalWeight,txtDescription);
             }
         });
         associateButton.addActionListener(new ActionListener() {
