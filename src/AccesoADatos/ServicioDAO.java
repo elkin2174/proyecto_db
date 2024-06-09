@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServicioDAO {
-    private static final String INSERT_SQL = "INSERT INTO servicio (codigo, numero_paquetes, origen, destino, tipo_transporte, descripcion, ciudad, fecha_solicitud, id_mensajero, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_SQL = "INSERT INTO servicio (numero_paquetes, origen, destino, tipo_transporte, descripcion, ciudad, fecha_solicitud, id_mensajero, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM servicio WHERE codigo = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM servicio";
     private static final String UPDATE_SQL = "UPDATE servicio SET numero_paquetes = ?, origen = ?, destino = ?, tipo_transporte = ?, descripcion = ?, ciudad = ?, fecha_solicitud = ?, id_mensajero = ?, id_usuario = ? WHERE codigo = ?";
@@ -24,16 +24,15 @@ public class ServicioDAO {
     public void insert(Servicio servicio) {
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
-            stmt.setString(1, servicio.getCodigo()+"");
-            stmt.setInt(2, servicio.getNumPaquetes());
-            stmt.setString(3, servicio.getOrigen());
-            stmt.setString(4, servicio.getDestino());
-            stmt.setString(5, servicio.getTipoTransporte());
-            stmt.setString(6, servicio.getDescripcion());
-            stmt.setString(7, servicio.getCiudad());
-            stmt.setTimestamp(8, Timestamp.valueOf(servicio.getFechaSolicitud()));
-            stmt.setString(9, servicio.getMensajero().getIdentificacion()+"");
-            stmt.setString(10, servicio.getCliente().getLogin());
+            stmt.setInt(1, servicio.getNumPaquetes());
+            stmt.setString(2, servicio.getOrigen());
+            stmt.setString(3, servicio.getDestino());
+            stmt.setString(4, servicio.getTipoTransporte());
+            stmt.setString(5, servicio.getDescripcion());
+            stmt.setString(6, servicio.getCiudad());
+            stmt.setTimestamp(7, Timestamp.valueOf(servicio.getFechaSolicitud()));
+            stmt.setString(8, servicio.getMensajero().getIdentificacion());
+            stmt.setString(9, servicio.getCliente().getLogin());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

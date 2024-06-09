@@ -46,7 +46,7 @@ public class Login  extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if (LoginControlador.validateLoginMensajero(txtDelivery, psDelivery, deliveryErrorMsg)) {
                     dispose();
-                    IClient.main(new String[]{});
+                    IDelivery.main(new String[]{});
                 }
             }
         });

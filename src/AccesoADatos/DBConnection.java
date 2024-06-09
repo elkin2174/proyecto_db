@@ -8,8 +8,8 @@ public class DBConnection {
 
     public DBConnection() {
         url = "jdbc:postgresql://localhost:5432/proyecto_bd";
-        usuario = "juan";
-        password = "12345";
+        usuario = "postgres";
+        password = "postgres";
     }
 
     public Connection openConnection() {
