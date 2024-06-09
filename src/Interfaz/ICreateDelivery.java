@@ -1,9 +1,10 @@
 package Interfaz;
 
+import Controlador.ICreateDeliveryC;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class ICreateDelivery extends JFrame {
     private JLabel lNit;
@@ -16,8 +17,8 @@ public class ICreateDelivery extends JFrame {
     private JTextField txtAddress;
     private JTextField txtEmail;
     private JTextField txtUsername;
-    private JTextField txtPassword;
-    private JTextField txtCPassword;
+    private JPasswordField txtPassword;
+    private JPasswordField txtCPassword;
     private JPanel panel1;
 
     public ICreateDelivery() {
@@ -28,7 +29,9 @@ public class ICreateDelivery extends JFrame {
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (ICreateDeliveryC.createDelivery(txtId,txtFirstName, txtLastName, txtEmail,txtAddress, txtTel, txtPassword, txtCPassword, txtUsername)) {
+                    dispose();
+                }
             }
         });
         cancelButton.addActionListener(new ActionListener() {

@@ -21,13 +21,13 @@ public class Mensajero {
     } // Constructor vacío
 
     // Constructor con argumentos
-    public Mensajero(String id, String name, String email, String direccion, String telefono, UsuarioMensajero user) {
+    public Mensajero(String id, String name, String email, String direccion, String telefono) { //, UsuarioMensajero user) {
         this.identificacion = id;
         this.nombre = name;
         this.email = email;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.usuario = user;
+        //this.usuario = user;
         clientes = new ArrayList<>();
         servicios = new ArrayList<>();
     }
@@ -96,11 +96,11 @@ public class Mensajero {
         servicios.add(servicio);
     }
 
-    public UsuarioMensajero getUsuario() {
-        return usuario;
-    }
+    //public UsuarioMensajero getUsuario() {
+    //    return usuario;
+    //}
 
-    public void setUsuario(UsuarioMensajero usuario) {
-        this.usuario = usuario;
-    }
+    //public void setUsuario(UsuarioMensajero usuario) {
+    //    this.usuario = usuario;
+    //}
 }

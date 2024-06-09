@@ -12,23 +12,31 @@ public class MensajeroDAO {
     private static final String UPDATE_SQL = "UPDATE mensajero SET nombre = ?, email = ?, direccion = ?, telefono = ? WHERE identificacion = ?";
     private static final String DELETE_SQL = "DELETE FROM mensajero WHERE identificacion = ?";
 
-    private DBConnection dbConnection;
+    DBConnection dbConnection;
 
     public MensajeroDAO() {
         this.dbConnection = new DBConnection();
     }
 
-    public void insert(Mensajero mensajero) {
+    public int insert(Mensajero mensajero) {
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
-            stmt.setString(1, mensajero.getIdentificacion()+"");
+            System.out.println("Id: " + mensajero.getIdentificacion() + "\n" +
+                    "Nombre: " + mensajero.getNombre() + "\n" +
+                    "Email: " + mensajero.getEmail() + "\n" +
+                    "Ciudad: ");
+
+            stmt.setString(1, mensajero.getIdentificacion());
             stmt.setString(2, mensajero.getNombre());
             stmt.setString(3, mensajero.getEmail());
             stmt.setString(4, mensajero.getDireccion());
-            stmt.setString(5, mensajero.getTelefono()+"");
+            stmt.setString(5, mensajero.getTelefono());
             stmt.executeUpdate();
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println(e.getErrorCode());
+            return 1;
         }
     }
 

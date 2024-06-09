@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioMensajeroDAO {
-    private static final String INSERT_SQL = "INSERT INTO usuario_mensajero (login, contraseña, id_mensajero) VALUES (?, ?, ?)";
+    private static final String INSERT_SQL = "INSERT INTO usuario_mensajero (login, contrasena, id_mensajero) VALUES (?, ?, ?)";
     private static final String SELECT_BY_LOGIN_SQL = "SELECT * FROM usuario_mensajero WHERE login = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM usuario_mensajero";
-    private static final String UPDATE_SQL = "UPDATE usuario_mensajero SET contraseña = ?, id_mensajero = ? WHERE login = ?";
+    private static final String UPDATE_SQL = "UPDATE usuario_mensajero SET contrasena = ?, id_mensajero = ? WHERE login = ?";
     private static final String DELETE_SQL = "DELETE FROM usuario_mensajero WHERE login = ?";
 
     private DBConnection dbConnection;
@@ -19,15 +19,18 @@ public class UsuarioMensajeroDAO {
         this.dbConnection = new DBConnection();
     }
 
-    public void insert(UsuarioMensajero usuarioMensajero) {
+    public int insert(UsuarioMensajero usuarioMensajero) {
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
             stmt.setString(1, usuarioMensajero.getLogin());
             stmt.setString(2, usuarioMensajero.getPassword());
             stmt.setString(3, usuarioMensajero.getMensajero().getIdentificacion());
             stmt.executeUpdate();
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println(e.getErrorCode());
+            return 1;
         }
     }
 
