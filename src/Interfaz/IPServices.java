@@ -23,11 +23,11 @@ public class IPServices extends JPanel{
         lbCity.setText(city);
         lbAddress.setText(address);
         lbTel.setText(Tel);
-        lbTel.setText(email);
+        lbMail.setText(email);
         viewDetailsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                IService.main(new String[]{});
             }
         });
     }
