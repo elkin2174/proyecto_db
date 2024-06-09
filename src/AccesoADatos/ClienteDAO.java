@@ -118,7 +118,6 @@ public class ClienteDAO {
                     mensajero.setEmail(rs.getString("email"));
                     mensajero.setDireccion(rs.getString("direccion"));
                     mensajero.setTelefono(rs.getString("telefono"));
-                    mensajero.setServicios(mensajeroDAO.selectServicios(mensajero.getIdentificacion()));
                     mensajeros.add(mensajero);
                 }
             }
