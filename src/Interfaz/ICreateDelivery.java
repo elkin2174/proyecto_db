@@ -1,6 +1,6 @@
 package Interfaz;
 
-import Controlador.ICreateDeliveryC;
+import Controlador.CreateDeliveryC;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -29,7 +29,7 @@ public class ICreateDelivery extends JFrame {
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (ICreateDeliveryC.createDelivery(txtId,txtFirstName, txtLastName, txtEmail,txtAddress, txtTel, txtPassword, txtCPassword, txtUsername)) {
+                if (CreateDeliveryC.createDelivery(txtId,txtFirstName, txtLastName, txtEmail,txtAddress, txtTel, txtPassword, txtCPassword, txtUsername)) {
                     dispose();
                 }
             }

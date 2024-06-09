@@ -1,19 +1,17 @@
 package Controlador;
 
 import AccesoADatos.*;
-import Modelo.Cliente;
-import Modelo.UsuarioCliente;
-//import org.postgresql.util.PSQLException;
+import Modelo.Mensajero;
+import Modelo.UsuarioMensajero;
 
 import javax.swing.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+public class CreateDeliveryC {
 
-public class ICreateClientC {
-
-    public static ClienteDAO clienteDAO = new ClienteDAO();
-    public static UsuarioClienteDAO usuarioClienteDAO = new UsuarioClienteDAO();
+    public static MensajeroDAO mensajeroDAO = new MensajeroDAO();
+    public static UsuarioMensajeroDAO usuarioMensajeroDAO = new UsuarioMensajeroDAO();
 
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
@@ -29,13 +27,11 @@ public class ICreateClientC {
         return matcher.matches();
     }
 
-    public static boolean createClient(JTextField tfId, JComboBox cbTipoCliente, JTextField tfNombre, JTextField tfApellido, JTextField tfEmail, JTextField tfCiudad, JTextField tfDireccion, JTextField tfTelefono, JPasswordField tfPassword, JPasswordField tfCPassword, JTextField tfUsername) {
+    public static boolean createDelivery(JTextField tfId, JTextField tfNombre, JTextField tfApellido, JTextField tfEmail, JTextField tfDireccion, JTextField tfTelefono, JPasswordField tfPassword, JPasswordField tfCPassword, JTextField tfUsername) {
         // Obtener toda la información de los campos
         String id = tfId.getText();
-        String tipoCliente = cbTipoCliente.getSelectedItem().toString();
         String nombre = tfNombre.getText() + tfApellido.getText();
         String email = tfEmail.getText();
-        String ciudad = tfCiudad.getText();
         String direccion = tfDireccion.getText();
         String telefono = tfTelefono.getText();
         String password = String.valueOf(tfPassword.getPassword());
@@ -47,7 +43,6 @@ public class ICreateClientC {
         tfNombre.setText("");
         tfApellido.setText("");
         tfEmail.setText("");
-        tfCiudad.setText("");
         tfDireccion.setText("");
         tfTelefono.setText("");
         tfPassword.setText("");
@@ -72,18 +67,18 @@ public class ICreateClientC {
             return false;
         }
         else {
-            // Insertar cliente
-            Cliente cliente = new Cliente(id, tipoCliente, nombre, email, ciudad, direccion, telefono);
-            if (clienteDAO.insert(cliente)==0) {
-                JOptionPane.showMessageDialog(null, "Cliente creado exitosamente");
+            // Insertar mensajero
+            Mensajero mensajero = new Mensajero(id, nombre, email, direccion, telefono);
+            if (mensajeroDAO.insert(mensajero)==0) {
+                JOptionPane.showMessageDialog(null, "Mensajero creado exitosamente");
             } else {
-                JOptionPane.showMessageDialog(null, "Ya existe un cliente con esa identificación");
+                JOptionPane.showMessageDialog(null, "Ya existe un mensajero con esa identificación");
                 return false;
             }
 
             //Insertar usuario
-            UsuarioCliente user = new UsuarioCliente(username, password, direccion, email, telefono, cliente);
-            if (usuarioClienteDAO.insert(user)==1) {
+            UsuarioMensajero user = new UsuarioMensajero(username, password, mensajero);
+            if (usuarioMensajeroDAO.insert(user)==1) {
                 JOptionPane.showMessageDialog(null, "Username ya existe, debe crear uno nuevo");
                 return false;
             }
@@ -92,8 +87,4 @@ public class ICreateClientC {
         }
     }
 
-
-    public static void createUser() {
-
-    }
 }

@@ -44,7 +44,7 @@ public class UsuarioMensajeroDAO {
                 if (rs.next()) {
                     usuarioMensajero = new UsuarioMensajero();
                     usuarioMensajero.setLogin(rs.getString("login"));
-                    usuarioMensajero.setPassword(rs.getString("contraseña"));
+                    usuarioMensajero.setPassword(rs.getString("contrasena"));
                     mensajero.setIdentificacion(rs.getString("id_mensajero"));
                     usuarioMensajero.setMensajero(mensajero);
                 }
@@ -64,7 +64,7 @@ public class UsuarioMensajeroDAO {
             while (rs.next()) {
                 UsuarioMensajero usuarioMensajero = new UsuarioMensajero();
                 usuarioMensajero.setLogin(rs.getString("login"));
-                usuarioMensajero.setPassword(rs.getString("contraseña"));
+                usuarioMensajero.setPassword(rs.getString("contrasena"));
                 mensajero.setIdentificacion(rs.getString("id_mensajero"));
                 usuarioMensajero.setMensajero(mensajero);
                 usuariosMensajero.add(usuarioMensajero);

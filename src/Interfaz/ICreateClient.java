@@ -1,6 +1,6 @@
 package Interfaz;
 
-import Controlador.ICreateClientC;
+import Controlador.CreateClientC;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,7 +34,7 @@ public class ICreateClient extends JFrame {
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (ICreateClientC.createClient(txtId, comboBox1, txtFirstName, txtLastName, txtEmail, txtCity, txtAddress, txtTel, txtPassword, txtCPassword, txtUsername)) {
+                if (CreateClientC.createClient(txtId, comboBox1, txtFirstName, txtLastName, txtEmail, txtCity, txtAddress, txtTel, txtPassword, txtCPassword, txtUsername)) {
                     dispose();
                 }
             }

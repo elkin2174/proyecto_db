@@ -1,6 +1,8 @@
 package Interfaz;
 
 
+import Controlador.CreateUserClientC;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +29,9 @@ public class ICreateUserClient  extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (CreateUserClientC.createUserClient(txtEmail, txtAddress, txtUsername, txtPassword, txtPassword)) {
+                    dispose();
+                }
             }
         });
         cancelButton.addActionListener(new ActionListener() {

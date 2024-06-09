@@ -24,7 +24,7 @@ public class Login  extends JFrame{
     private JLabel clientErrorMsg;
     private JLabel deliveryErrorMsg;
 
-    public Login(){
+    public Login() {
         super("Login");
         setContentPane(panel1);
         setSize(600, 400);
