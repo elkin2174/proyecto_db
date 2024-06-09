@@ -4,7 +4,7 @@ public class Sucursal {
     private int numSucursal;
     private String nombre;
     private String direccion;
-    private int telefono;
+    private String telefono;
 
     // Representación de las relaciones
     private Cliente cliente;
@@ -12,7 +12,7 @@ public class Sucursal {
     public Sucursal() { } // Constructor vacío
 
     // Constructor con argumentos
-    public Sucursal(int numSucursal, String nombre, String direccion, int telefono, Cliente cliente) {
+    public Sucursal(int numSucursal, String nombre, String direccion, String telefono, Cliente cliente) {
         this.cliente = cliente;
         this.numSucursal = numSucursal;
         this.nombre = nombre;
@@ -45,15 +45,19 @@ public class Sucursal {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
     public Cliente getCliente() {
         return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

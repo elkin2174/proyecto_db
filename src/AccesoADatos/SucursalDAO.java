@@ -21,11 +21,11 @@ public class SucursalDAO {
     public void insert(Sucursal sucursal) {
         try (Connection conn = conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
-            stmt.setString(1, sucursal.getCliente().getIdentificacion()+"");
+            stmt.setString(1, sucursal.getCliente().getIdentificacion());
             stmt.setInt(2, sucursal.getNumSucursal());
             stmt.setString(3, sucursal.getNombre());
             stmt.setString(4, sucursal.getDireccion());
-            stmt.setString(5, sucursal.getTelefono()+"");
+            stmt.setString(5, sucursal.getTelefono());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,18 +33,20 @@ public class SucursalDAO {
     }
 
     public Sucursal selectById(String idCliente, int noSucursal) {
-        Sucursal sucursal = null;
+        Sucursal sucursal = new Sucursal();
+        ClienteDAO clienteDAO = new ClienteDAO();
+
         try (Connection conn = conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
             stmt.setString(1, idCliente);
             stmt.setInt(2, noSucursal);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    sucursal = new Sucursal();
                     sucursal.setNumSucursal(rs.getInt("no_sucursal"));
                     sucursal.setNombre(rs.getString("nombre"));
                     sucursal.setDireccion(rs.getString("direccion"));
-                    sucursal.setTelefono(Integer.parseInt(rs.getString("telefono")));
+                    sucursal.setTelefono(rs.getString("telefono"));
+                    sucursal.setCliente(clienteDAO.selectById(rs.getString("id_cliente")));
                 }
             }
         } catch (SQLException e) {
@@ -55,6 +57,8 @@ public class SucursalDAO {
 
     public List<Sucursal> selectAll() {
         List<Sucursal> sucursales = new ArrayList<>();
+        ClienteDAO clienteDAO = new ClienteDAO();
+
         try (Connection conn = conexion.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
@@ -63,7 +67,8 @@ public class SucursalDAO {
                 sucursal.setNumSucursal(rs.getInt("num_sucursal"));
                 sucursal.setNombre(rs.getString("nombre"));
                 sucursal.setDireccion(rs.getString("direccion"));
-                sucursal.setTelefono(Integer.parseInt(rs.getString("telefono")));
+                sucursal.setTelefono(rs.getString("telefono"));
+                sucursal.setCliente(clienteDAO.selectById(rs.getString("id_cliente")));
                 sucursales.add(sucursal);
             }
         } catch (SQLException e) {
@@ -77,8 +82,8 @@ public class SucursalDAO {
              PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
             stmt.setString(1, sucursal.getNombre());
             stmt.setString(2, sucursal.getDireccion());
-            stmt.setString(3, sucursal.getTelefono()+"");
-            stmt.setString(4, sucursal.getCliente().getIdentificacion()+"");
+            stmt.setString(3, sucursal.getTelefono());
+            stmt.setString(4, sucursal.getCliente().getIdentificacion());
             stmt.setInt(5, sucursal.getNumSucursal());
             stmt.executeUpdate();
         } catch (SQLException e) {

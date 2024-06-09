@@ -33,7 +33,7 @@ public class EstadoDAO {
 
     public Estado selectById(String codigoServicio, String estadoActual) {
         Estado estado = null;
-        Servicio serv = new Servicio();
+        ServicioDAO servicioDAO = new ServicioDAO();
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
             stmt.setString(1, codigoServicio);
@@ -43,8 +43,7 @@ public class EstadoDAO {
                     estado = new Estado();
                     estado.setFecha(rs.getTimestamp("fecha").toLocalDateTime());
                     estado.setEstadoActual(rs.getString("estado_actual"));
-                    serv.setCodigo(Integer.parseInt(rs.getString("codigo_servicio")));
-                    estado.setServicio(serv);
+                    estado.setServicio(servicioDAO.selectById(rs.getString("codigo_servicio")));
                 }
             }
         } catch (SQLException e) {
@@ -55,7 +54,7 @@ public class EstadoDAO {
 
     public List<Estado> selectAll() {
         List<Estado> estados = new ArrayList<>();
-        Servicio serv = new Servicio();
+        ServicioDAO servicioDAO = new ServicioDAO();
         try (Connection conn = dbConnection.openConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
@@ -63,8 +62,7 @@ public class EstadoDAO {
                 Estado estado = new Estado();
                 estado.setFecha(rs.getTimestamp("fecha").toLocalDateTime());
                 estado.setEstadoActual(rs.getString("estado_actual"));
-                serv.setCodigo(Integer.parseInt(rs.getString("codigo_servicio")));
-                estado.setServicio(serv);
+                estado.setServicio(servicioDAO.selectById(rs.getString("codigo_servicio")));
                 estados.add(estado);
             }
         } catch (SQLException e) {

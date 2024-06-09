@@ -1,6 +1,9 @@
 package AccesoADatos;
 
+import Modelo.Cliente;
 import Modelo.Mensajero;
+import Modelo.Servicio;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +12,8 @@ public class MensajeroDAO {
     private static final String INSERT_SQL = "INSERT INTO mensajero (identificacion, nombre, email, direccion, telefono) VALUES (?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM mensajero WHERE identificacion = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM mensajero";
+    private static final String SELECT_CLIENTS_SQL = "SELECT * FROM cliente JOIN asociado ON cliente.identificacion=asociado.id_cliente AND asociado.id_mensajero = ?";
+    private static final String SELECT_SERVICES_SQL = "SELECT * FROM servicio WHERE id_mensajero = ?";
     private static final String UPDATE_SQL = "UPDATE mensajero SET nombre = ?, email = ?, direccion = ?, telefono = ? WHERE identificacion = ?";
     private static final String DELETE_SQL = "DELETE FROM mensajero WHERE identificacion = ?";
 
@@ -21,11 +26,6 @@ public class MensajeroDAO {
     public int insert(Mensajero mensajero) {
         try (Connection conn = dbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
-            System.out.println("Id: " + mensajero.getIdentificacion() + "\n" +
-                    "Nombre: " + mensajero.getNombre() + "\n" +
-                    "Email: " + mensajero.getEmail() + "\n" +
-                    "Ciudad: ");
-
             stmt.setString(1, mensajero.getIdentificacion());
             stmt.setString(2, mensajero.getNombre());
             stmt.setString(3, mensajero.getEmail());
@@ -53,6 +53,8 @@ public class MensajeroDAO {
                     mensajero.setEmail(rs.getString("email"));
                     mensajero.setDireccion(rs.getString("direccion"));
                     mensajero.setTelefono(rs.getString("telefono"));
+                    mensajero.setClientes(selectClientesAsociados(mensajero.getIdentificacion()));
+                    mensajero.setServicios(selectServicios(mensajero.getIdentificacion()));
                 }
             }
         } catch (SQLException e) {
@@ -73,6 +75,8 @@ public class MensajeroDAO {
                 mensajero.setEmail(rs.getString("email"));
                 mensajero.setDireccion(rs.getString("direccion"));
                 mensajero.setTelefono(rs.getString("telefono"));
+                mensajero.setClientes(selectClientesAsociados(mensajero.getIdentificacion()));
+                mensajero.setServicios(selectServicios(mensajero.getIdentificacion()));
                 mensajeros.add(mensajero);
             }
         } catch (SQLException e) {
@@ -81,14 +85,67 @@ public class MensajeroDAO {
         return mensajeros;
     }
 
+    public List<Cliente> selectClientesAsociados(String id_mensajero) {
+        List<Cliente> clientes = new ArrayList<>();
+        try (Connection conn = dbConnection.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_CLIENTS_SQL)) {
+
+            stmt.setString(1, id_mensajero);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Cliente cliente = new Cliente();
+                    cliente.setIdentificacion(rs.getString("identificacion"));
+                    cliente.setNombre(rs.getString("nombre"));
+                    cliente.setTipoCliente(rs.getString("tipo_cliente"));
+                    cliente.setCiudad(rs.getString("ciudad"));
+                    cliente.setEmail(rs.getString("email"));
+                    cliente.setTelefono(rs.getString("telefono"));
+                    clientes.add(cliente);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clientes;
+    }
+
+    public List<Servicio> selectServicios(String id_mensajero) {
+        List<Servicio> servicios = new ArrayList<>();
+        MensajeroDAO mensajeroDAO = new MensajeroDAO();
+
+        try (Connection conn = dbConnection.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_SERVICES_SQL)) {
+
+            stmt.setString(1, id_mensajero);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Servicio servicio = new Servicio();
+                    servicio.setCodigo(Integer.parseInt(rs.getString("codigo")));
+                    servicio.setNumPaquetes(rs.getInt("numero_paquetes"));
+                    servicio.setOrigen(rs.getString("origen"));
+                    servicio.setDestino(rs.getString("destino"));
+                    servicio.setTipoTransporte(rs.getString("tipo_transporte"));
+                    servicio.setDescripcion(rs.getString("descripcion"));
+                    servicio.setCiudad(rs.getString("ciudad"));
+                    servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
+                    servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
+                    servicios.add(servicio);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return servicios;
+    }
+
     public void update(Mensajero mensajero) {
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
             stmt.setString(1, mensajero.getNombre());
             stmt.setString(2, mensajero.getEmail());
             stmt.setString(3, mensajero.getDireccion());
-            stmt.setString(4, mensajero.getTelefono()+"");
-            stmt.setString(5, mensajero.getIdentificacion()+"");
+            stmt.setString(4, mensajero.getTelefono());
+            stmt.setString(5, mensajero.getIdentificacion());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

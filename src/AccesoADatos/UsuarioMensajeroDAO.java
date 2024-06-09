@@ -55,7 +55,8 @@ public class UsuarioMensajeroDAO {
 
     public List<UsuarioMensajero> selectAll() {
         List<UsuarioMensajero> usuariosMensajero = new ArrayList<>();
-        Mensajero mensajero = new Mensajero();
+        MensajeroDAO mensajeroDAO = new MensajeroDAO();
+
         try (Connection conn = dbConnection.openConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
@@ -63,8 +64,7 @@ public class UsuarioMensajeroDAO {
                 UsuarioMensajero usuarioMensajero = new UsuarioMensajero();
                 usuarioMensajero.setLogin(rs.getString("login"));
                 usuarioMensajero.setPassword(rs.getString("contrasena"));
-                mensajero.setIdentificacion(rs.getString("id_mensajero"));
-                usuarioMensajero.setMensajero(mensajero);
+                usuarioMensajero.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
                 usuariosMensajero.add(usuarioMensajero);
             }
         } catch (SQLException e) {
