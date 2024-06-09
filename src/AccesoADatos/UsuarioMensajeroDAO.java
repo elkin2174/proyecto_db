@@ -35,18 +35,16 @@ public class UsuarioMensajeroDAO {
     }
 
     public UsuarioMensajero selectByLogin(String login) {
-        UsuarioMensajero usuarioMensajero = null;
-        Mensajero mensajero = new Mensajero();
+        UsuarioMensajero usuarioMensajero = new UsuarioMensajero();
+        MensajeroDAO mensajeroDAO = new MensajeroDAO();
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_LOGIN_SQL)) {
             stmt.setString(1, login);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    usuarioMensajero = new UsuarioMensajero();
                     usuarioMensajero.setLogin(rs.getString("login"));
                     usuarioMensajero.setPassword(rs.getString("contrasena"));
-                    mensajero.setIdentificacion(rs.getString("id_mensajero"));
-                    usuarioMensajero.setMensajero(mensajero);
+                    usuarioMensajero.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
                 }
             }
         } catch (SQLException e) {
