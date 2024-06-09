@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Modelo.Cliente;
-import org.postgresql.util.PSQLException;
+//import org.postgresql.util.PSQLException;
 
 public class ClienteDAO {
     private static final String INSERT_SQL = "INSERT INTO cliente (identificacion, tipo_cliente, nombre, email, ciudad, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";

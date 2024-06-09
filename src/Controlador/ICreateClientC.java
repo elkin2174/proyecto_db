@@ -3,7 +3,7 @@ package Controlador;
 import AccesoADatos.*;
 import Modelo.Cliente;
 import Modelo.UsuarioCliente;
-import org.postgresql.util.PSQLException;
+//import org.postgresql.util.PSQLException;
 
 import javax.swing.*;
 import java.util.regex.Pattern;

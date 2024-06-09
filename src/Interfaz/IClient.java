@@ -54,6 +54,20 @@ public class IClient extends JFrame{
         pActiveServices.setLayout(new BoxLayout(pActiveServices, BoxLayout.Y_AXIS));
         pPreviousServices.setLayout(new BoxLayout(pPreviousServices, BoxLayout.Y_AXIS));
 
+
+//tEST
+        for (int i = 0; i < 3; i++) {
+            addPanelActiveServices();
+        }
+        for (int i = 0; i < 2; i++) {
+            addPanelPreviousServices();
+        }
+
+        spActiveServices.setViewportView(pActiveServices);
+        spPreviousServices.setViewportView(pPreviousServices);
+        cardLayout = (CardLayout) cardPanel.getLayout();
+
+
         // Crear un DefaultTableModel y añadir las columnas
         model = new DefaultTableModel();
         model.addColumn("ID");
@@ -68,19 +82,6 @@ public class IClient extends JFrame{
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
         columnModel.getColumn(0).setCellRenderer(centerRenderer);
-//tEST
-        for (int i = 0; i < 3; i++) {
-            addPanelActiveServices();
-        }
-        for (int i = 0; i < 2; i++) {
-            addPanelPreviousServices();
-        }
-
-        spActiveServices.setViewportView(pActiveServices);
-        spPreviousServices.setViewportView(pPreviousServices);
-        cardLayout = (CardLayout) cardPanel.getLayout();
-
-
         activeServicesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
