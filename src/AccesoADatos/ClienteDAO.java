@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import Modelo.Cliente;
+import Modelo.Mensajero;
 //import org.postgresql.util.PSQLException;
 
 public class ClienteDAO {
@@ -12,7 +13,7 @@ public class ClienteDAO {
     private static final String SELECT_ALL_SQL = "SELECT * FROM cliente";
     private static final String UPDATE_SQL = "UPDATE cliente SET tipo_cliente = ?, nombre = ?, email = ?, ciudad = ?, direccion = ?, telefono = ? WHERE identificacion = ?";
     private static final String DELETE_SQL = "DELETE FROM cliente WHERE identificacion = ?";
-
+    private static final String INSERT_MENSAJERO_SQL = "INSERT INTO asociado (id_cliente, id_mensajero) VALUES (?,?)";
     DBConnection conexion;
 
     public ClienteDAO() {
@@ -123,6 +124,21 @@ public class ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public boolean updateMensajeros(Cliente cliente, Mensajero mensajero){
+        try (Connection conn = conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(INSERT_MENSAJERO_SQL)) {
+
+            stmt.setString(1, cliente.getIdentificacion());
+            stmt.setString(2, mensajero.getIdentificacion());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getErrorCode());
+            return false;
+        }
+
     }
 }
 
