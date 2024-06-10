@@ -49,15 +49,12 @@ public class IServiceC {
         }
 
 
-
         JOptionPane.showMessageDialog(null, "Servicio creado correctamente ");
         origen.setText("");
         destini.setText("");
         numPackage.setValue(0);
         weightPackage.setValue(0);
         descripcion.setText("");
-
-
     }
 
     private Mensajero getMensajero() {
