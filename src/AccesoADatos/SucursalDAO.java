@@ -30,6 +30,7 @@ public class SucursalDAO {
             stmt.setString(4, sucursal.getTelefono());
             stmt.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
         return true;

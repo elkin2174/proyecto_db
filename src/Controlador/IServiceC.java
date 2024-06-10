@@ -72,6 +72,9 @@ public class IServiceC {
         }catch (IndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(null,"No hay mensajeros asociados");
             return null;
+        }catch (IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(null,"No hay mensajeros asociados");
+            return null;
         }
     }
 
