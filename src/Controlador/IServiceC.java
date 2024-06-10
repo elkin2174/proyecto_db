@@ -44,9 +44,12 @@ public class IServiceC {
             EstadoDAO estadoDAO = new EstadoDAO();
             Estado estado = new Estado(EstadoDAO.REQUIERED,servicio);
             estadoDAO.insert(estado);
+            servicio.getEstados().add(estado);
         }catch (Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+
+        LoginControlador.getUsuarioContext().getServiciosSolicitados().add(servicio);
 
 
         JOptionPane.showMessageDialog(null, "Servicio creado correctamente ");
@@ -82,7 +85,7 @@ public class IServiceC {
                                JLabel tipoTranporte, JLabel numPackage,JLabel description, JLabel status, JLabel statusDate,
                                JLabel img) {
         ServicioDAO servicioDAO = new ServicioDAO();
-        Servicio servicio = servicioDAO.selectById(id);
+        Servicio servicio = servicioDAO.selectByIdClient(id);
         lbCodigo.setText(Integer.toString(servicio.getCodigo()));
         lbOrigin.setText(servicio.getOrigen());
         lbDestination.setText(servicio.getDestino());
@@ -121,7 +124,6 @@ public class IServiceC {
     public void changeStatus(Servicio servicio) {
         EstadoDAO estadoDAO = new EstadoDAO();
         if(servicio.getEstados().size() == 1){
-
             Estado estado = new Estado(EstadoDAO.PICKEDUP,servicio);
             estadoDAO.insert(estado);
             servicio.addEstado(estado);
@@ -129,7 +131,6 @@ public class IServiceC {
             Estado estado = new Estado(EstadoDAO.DELIVERED,servicio);
             estadoDAO.insert(estado);
             servicio.addEstado(estado);
-
         }
 
     }

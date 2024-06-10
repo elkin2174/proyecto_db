@@ -1,6 +1,9 @@
 package Interfaz;
 
+import AccesoADatos.EstadoDAO;
 import Controlador.IServiceC;
+import Controlador.LoginControlador;
+import Modelo.Estado;
 import Modelo.Servicio;
 
 import javax.swing.*;
@@ -38,8 +41,12 @@ public class IService extends JFrame {
         Servicio servicio = controlador.getServiceById(id,lbId,lbOrigen,lbDestination,lbDateRequest,lbTypeTransport,lbNumberPackages,
                 lbDescription,lbStatus, lbStatusDate,lbImage);
 
-
         changeStatusButton.setEnabled(!controlador.validationFinish(servicio));
+        if(LoginControlador.getUsuarioContext() != null){
+            panel1.remove(changeStatusButton);
+        }
+
+
 
         changeStatusButton.addActionListener(new ActionListener() {
             @Override
@@ -71,7 +78,11 @@ public class IService extends JFrame {
 //                    }
 
                     controlador.changeStatus(servicio);
+
                     changeStatusButton.setEnabled(!controlador.validationFinish(servicio));
+                    lbStatus.setText(controlador.getEstadoActual(servicio).getEstadoActual());
+                    lbStatusDate.setText(controlador.getEstadoActual(servicio).getFecha().toString());
+
 
             }
         });

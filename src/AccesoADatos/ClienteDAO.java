@@ -208,6 +208,7 @@ public class ClienteDAO {
             stmt.setString(1, cliente.getIdentificacion());
             stmt.setString(2, mensajero.getIdentificacion());
             stmt.executeUpdate();
+            cliente.addMensajero(mensajero);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

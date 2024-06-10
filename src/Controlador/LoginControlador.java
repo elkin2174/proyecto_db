@@ -41,6 +41,7 @@ public class LoginControlador {
 
         //Aquí se debe guardar el usuario en un estado de la aplicación
         usuarioContext = user;
+        mensajeroContext = null;
         return true;
     }
 
@@ -70,6 +71,7 @@ public class LoginControlador {
 
         //Aquí se debe guardar el usuario en un estado de la aplicación
         mensajeroContext = user;
+        usuarioContext = null;
 
         return true;
     }

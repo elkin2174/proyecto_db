@@ -79,6 +79,35 @@ public class ServicioDAO {
         }
         return servicio;
     }
+    public Servicio selectByIdClient(String codigo) {
+        Servicio servicio = null;
+        UsuarioCliente usuario = new UsuarioCliente();
+        MensajeroDAO mensajeroDAO = new MensajeroDAO();
+        UsuarioClienteDAO usuarioClienteDAO = new UsuarioClienteDAO();
+
+        try (Connection conn = dbConnection.openConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
+            stmt.setInt(1, Integer.parseInt(codigo));
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    servicio = new Servicio();
+                    servicio.setCodigo(rs.getInt("codigo"));
+                    servicio.setNumPaquetes(rs.getInt("numero_paquetes"));
+                    servicio.setOrigen(rs.getString("origen"));
+                    servicio.setDestino(rs.getString("destino"));
+                    servicio.setTipoTransporte(rs.getString("tipo_transporte"));
+                    servicio.setDescripcion(rs.getString("descripcion"));
+                    servicio.setCiudad(rs.getString("ciudad"));
+                    servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
+                    servicio.setCliente(usuarioClienteDAO.selectById(rs.getString("id_usuario")));
+                    servicio.setEstados(selectAllStates(servicio.getCodigo()));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return servicio;
+    }
 
     public List<Servicio> selectAll() {
         List<Servicio> servicios = new ArrayList<>();
