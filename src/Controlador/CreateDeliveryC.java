@@ -69,9 +69,7 @@ public class CreateDeliveryC {
         else {
             // Insertar mensajero
             Mensajero mensajero = new Mensajero(id, nombre, email, direccion, telefono);
-            if (mensajeroDAO.insert(mensajero)==0) {
-                JOptionPane.showMessageDialog(null, "Mensajero creado exitosamente");
-            } else {
+            if (mensajeroDAO.insert(mensajero)==1) {
                 JOptionPane.showMessageDialog(null, "Ya existe un mensajero con esa identificación");
                 return false;
             }
@@ -82,6 +80,8 @@ public class CreateDeliveryC {
                 JOptionPane.showMessageDialog(null, "Username ya existe, debe crear uno nuevo");
                 return false;
             }
+
+            JOptionPane.showMessageDialog(null, "Mensajero creado exitosamente");
 
             return true;
         }

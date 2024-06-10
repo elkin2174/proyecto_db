@@ -19,6 +19,7 @@ public class ICreateUserClient  extends JFrame {
     private JPanel panel1;
     private JPasswordField txtPassword;
     private JPasswordField txtCPassword;
+    private JTextField txtTel;
 
     public ICreateUserClient() {
         super("Create Users");
@@ -29,7 +30,7 @@ public class ICreateUserClient  extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (CreateUserClientC.createUserClient(txtEmail, txtAddress, txtUsername, txtPassword, txtPassword)) {
+                if (CreateUserClientC.createUserClient(txtEmail, txtAddress, txtTel,txtUsername, txtPassword, txtPassword)) {
                     dispose();
                 }
             }

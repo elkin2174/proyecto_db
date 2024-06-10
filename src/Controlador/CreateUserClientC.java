@@ -20,8 +20,9 @@ public class CreateUserClientC {
         return matcher.matches();
     }
 
-    public static boolean createUserClient(JTextField tfEmail, JTextField tfAddress, JTextField tfUsername, JPasswordField tfPassword,  JPasswordField tfCPassword) {
+    public static boolean createUserClient(JTextField tfEmail, JTextField tfAddress, JTextField tel, JTextField tfUsername, JPasswordField tfPassword,  JPasswordField tfCPassword) {
         // Obtener toda la información de los campos
+        String telefono = tel.getText();
         String email = tfEmail.getText();
         String direccion = tfAddress.getText();
         String password = String.valueOf(tfPassword.getPassword());
@@ -40,7 +41,7 @@ public class CreateUserClientC {
         else {
             // Crear usuario
             Cliente cliente = usuarioClienteContext.getCliente();
-            UsuarioCliente user = new UsuarioCliente(username, password, direccion, email, "", cliente);
+            UsuarioCliente user = new UsuarioCliente(username, password, direccion, email, telefono, cliente);
             if (usuarioClienteDAO.insert(user) == 0) {
                 JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
 
@@ -48,6 +49,7 @@ public class CreateUserClientC {
                 tfEmail.setText("");
                 tfAddress.setText("");
                 tfPassword.setText("");
+                tel.setText("");
                 tfCPassword.setText("");
                 tfUsername.setText("");
 
