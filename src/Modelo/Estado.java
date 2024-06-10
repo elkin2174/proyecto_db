@@ -15,6 +15,7 @@ public class Estado {
     private LocalDateTime fecha;
     private String estadoActual;
 
+    private String foto;
     // Representación de relaciones
     private Servicio servicio;
 
@@ -31,6 +32,13 @@ public class Estado {
         this.estadoActual = estadoActual;
         this.servicio = servicio;
         this.fecha = LocalDateTime.now();
+    }
+    public Estado(String codigo_estado,String estadoActual, Servicio servicio,String foto) {
+        this.codigo_estado = codigo_estado;
+        this.estadoActual = estadoActual;
+        this.servicio = servicio;
+        this.fecha = LocalDateTime.now();
+        this.foto = foto;
     }
 
     public Servicio getServicio() {
@@ -56,4 +64,6 @@ public class Estado {
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
+    public String getFoto() {return foto;}
+    public void setFoto(String foto) {this.foto = foto;}
 }

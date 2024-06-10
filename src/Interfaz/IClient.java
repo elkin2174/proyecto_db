@@ -120,8 +120,8 @@ public class IClient extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Login.main(new String[]{});
                 LoginControlador.setUsuarioContext(null);
+                Login.main(new String[]{});
             }
         });
         cancelButton.addActionListener(new ActionListener() {

@@ -105,6 +105,7 @@ public class IServiceC {
         description.setText(servicio.getDescripcion());
         status.setText(getEstadoActual(servicio).getEstadoActual());
         statusDate.setText(getEstadoActual(servicio).getFecha().toString());
+//      img.setIcon(new ImageIcon());
 
         return servicio;
 //      ImageIcon imageIcon = new ImageIcon("src/data/" + getEstadoActual(servicio).ge);
