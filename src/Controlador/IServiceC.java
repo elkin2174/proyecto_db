@@ -53,18 +53,16 @@ public class IServiceC {
         LoginControlador.getUsuarioContext().getServiciosSolicitados().add(servicio);
 
 
-
         JOptionPane.showMessageDialog(null, "Servicio creado correctamente ");
         origen.setText("");
         destini.setText("");
         numPackage.setValue(0);
         weightPackage.setValue(0);
         descripcion.setText("");
-
-
     }
 
     private Mensajero getMensajero() {
+
         Random random = new Random();
         try {
             int indiceAleatorio = random.nextInt(usuarioContext.getCliente().getMensajeros().size());
@@ -76,6 +74,7 @@ public class IServiceC {
             JOptionPane.showMessageDialog(null,"No hay mensajeros asociados");
             return null;
         }
+
     }
 
     private String getTipoTranporte(int numberPackege, JSpinner weightPackage) {
@@ -125,6 +124,7 @@ public class IServiceC {
     public Estado getEstadoActual(Servicio servicio){
         return  servicio.getEstados().get(servicio.getEstados().size()-1);
     }
+
     public boolean validationFinish(Servicio servicio){
         if(servicio.getEstados().size() == 3){
             return true;

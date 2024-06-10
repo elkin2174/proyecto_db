@@ -20,10 +20,12 @@ public class LoginControlador {
         errorMsg.setText("");
         String userStr = username.getText();
         String passStr = String.valueOf(password.getPassword());
+
         if (userStr.isEmpty() || passStr.isEmpty()) {
             errorMsg.setText("No pueden haber campos vacíos");
             return false;
         }
+
         UsuarioClienteDAO dao = new UsuarioClienteDAO();
         UsuarioCliente user = dao.selectById(userStr);
 
@@ -31,10 +33,12 @@ public class LoginControlador {
             errorMsg.setText("El usuario no existe");
             return false;
         }
+
         if (!user.getPassword().equals(passStr)) {
             errorMsg.setText("Contraseña incorrecta");
             return false;
         }
+
         //Aquí se debe guardar el usuario en un estado de la aplicación
         usuarioContext = user;
         mensajeroContext = null;
@@ -47,13 +51,16 @@ public class LoginControlador {
         errorMsg.setText("");
         String userStr = username.getText();
         String passStr = String.valueOf(password.getPassword());
+
         if (userStr.isEmpty() || passStr.isEmpty()) {
             errorMsg.setText("No pueden haber campos vacíos");
             return false;
         }
+
         UsuarioMensajeroDAO dao = new UsuarioMensajeroDAO();
         UsuarioMensajero user = dao.selectByLogin(userStr);
-        if (user == null) {
+
+        if (user.getLogin() == null) {
             errorMsg.setText("El usuario no existe");
             return false;
         }
@@ -61,9 +68,11 @@ public class LoginControlador {
             errorMsg.setText("Contraseña incorrecta");
             return false;
         }
+
         //Aquí se debe guardar el usuario en un estado de la aplicación
         mensajeroContext = user;
         usuarioContext = null;
+
         return true;
     }
 

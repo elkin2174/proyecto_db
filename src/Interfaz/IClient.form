@@ -321,7 +321,7 @@
         </constraints>
         <properties>
           <background color="-8538036"/>
-          <text value="Close"/>
+          <text value="Log out"/>
         </properties>
       </component>
       <hspacer id="c9b4">

@@ -86,11 +86,11 @@ public class MensajeroDAO {
     }
     public List<Mensajero> selectAll() {
         List<Mensajero> mensajeros = new ArrayList<>();
+        Mensajero mensajero = new Mensajero();
         try (Connection conn = dbConnection.openConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
             while (rs.next()) {
-                Mensajero mensajero = new Mensajero();
                 mensajero.setIdentificacion(rs.getString("identificacion"));
                 mensajero.setNombre(rs.getString("nombre"));
                 mensajero.setEmail(rs.getString("email"));
