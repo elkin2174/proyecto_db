@@ -37,9 +37,6 @@ public class LoginControlador {
         }
         //Aquí se debe guardar el usuario en un estado de la aplicación
         usuarioContext = user;
-        for(Servicio servicio : usuarioContext.getServiciosSolicitados()){
-            System.out.println(servicio.getCodigo());
-        }
         return true;
     }
 

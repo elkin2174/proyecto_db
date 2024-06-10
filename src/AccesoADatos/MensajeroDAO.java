@@ -130,7 +130,7 @@ public class MensajeroDAO {
                     servicio.setCiudad(rs.getString("ciudad"));
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
                     servicio.setCliente(usuarioClienteDAO.selectById(rs.getString("id_usuario")));
-                    servicio.setEstados(servicioDAO.selectAllStates(rs.getString("codigo")));
+                    servicio.setEstados(servicioDAO.selectAllStates(rs.getInt("codigo")));
                     servicios.add(servicio);
                 }
             }

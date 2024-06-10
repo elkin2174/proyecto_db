@@ -24,8 +24,6 @@ public class IServiceC {
         } else {
             mensajeroContext = LoginControlador.getMensajeroContext();
         }
-
-
     }
     public void addService(JTextField origen, JTextField destini, JSpinner numPackage, JSpinner weightPackage,
                            JTextArea descripcion){
@@ -86,9 +84,10 @@ public class IServiceC {
                                JLabel img) {
         ServicioDAO servicioDAO = new ServicioDAO();
         Servicio servicio = servicioDAO.selectById(id);
-        lbCodigo.setText(servicio.getOrigen());
-        lbOrigin.setText(servicio.getDestino());
-        lbDestination.setText(servicio.getFechaSolicitud().toString());
+        lbCodigo.setText(Integer.toString(servicio.getCodigo()));
+        lbOrigin.setText(servicio.getOrigen());
+        lbDestination.setText(servicio.getDestino());
+        lbRequeseDate.setText(servicio.getFechaSolicitud().toString());
         tipoTranporte.setText(servicio.getTipoTransporte());
         numPackage.setText(Integer.toString(servicio.getNumPaquetes()));
         description.setText(servicio.getDescripcion());

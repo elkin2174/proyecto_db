@@ -108,7 +108,7 @@ public class UsuarioClienteDAO {
                     servicio.setCiudad(rs.getString("ciudad"));
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
                     servicio.setEstados(servicioDAO.selectAllStates(servicio.getCodigo()));
-                    servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
+                   // servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
                     servicios.add(servicio);
                 }
             }
