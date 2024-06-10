@@ -1,5 +1,6 @@
 package Interfaz;
 
+import Controlador.IClientC;
 import Controlador.IServiceC;
 import Controlador.LoginControlador;
 import Modelo.Cliente;
@@ -52,13 +53,14 @@ public class IClient extends JFrame{
     final static String CARD3 = "card3";
 
     private DefaultTableModel model;
+    private IClientC controler;
 
     public IClient(){
         super("Client Interfaz");
         setContentPane(panel1);
         setSize(600, 400);
         setLocationRelativeTo(null);
-
+        controler = new IClientC();
         clienteContex = LoginControlador.getUsuarioContext();
 
         cardLayout = (CardLayout) cardPanel.getLayout();
@@ -88,6 +90,8 @@ public class IClient extends JFrame{
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
         columnModel.getColumn(0).setCellRenderer(centerRenderer);
+        controler.cargarMensajeros(clienteContex.getCliente(),model);
+
         activeServicesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -147,7 +151,10 @@ public class IClient extends JFrame{
         });
         jIDeliverys.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {cardLayout.show(cardPanel,"card4");}
+            public void actionPerformed(ActionEvent e) {
+                controler.cargarTodosMensajero(comboBox1);
+                cardLayout.show(cardPanel,"card4");
+            }
         });
     }
 

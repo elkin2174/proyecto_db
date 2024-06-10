@@ -26,7 +26,22 @@ public class IClientC {
         };
     }
     public void cargarMensajeros(Cliente cliente, DefaultTableModel model){
-        ClienteDAO clienteDAO = new ClienteDAO();
+        model.setRowCount(0);
+        for (Mensajero mensajero : cliente.getMensajeros()){
+            model.addRow(new Object[]{
+                    mensajero.getIdentificacion(),
+                    mensajero.getNombre()
+            });
+        }
+    }
+    public void cargarTodosMensajero(JComboBox cbMensajeros){
+        DefaultComboBoxModel<Object> modelMensajeros = new DefaultComboBoxModel<>();
+        MensajeroDAO mensajeroDAO = new MensajeroDAO();
+        List<Mensajero> mensajeros =  mensajeroDAO.selectAll();
+        for(Mensajero mensajero : mensajeros){
+            modelMensajeros.addElement(mensajero.getIdentificacion() + " - " + mensajero.getNombre());
+        }
+        cbMensajeros.setModel(modelMensajeros);
 
     }
 

@@ -10,7 +10,7 @@ import java.util.stream.StreamSupport;
 
 public class EstadoDAO {
     public static final String REQUIERED = "Requiered";
-    public static final String PICKEDUP = "Pick by Delivery";
+    public static final String PICKEDUP = "PickUp";
     public static final String DELIVERED = "Deliverd";
 
     private static final String INSERT_SQL = "INSERT INTO estado (fecha,codigo_servicio,estado_actual, foto) VALUES (?,?, ?,?)";

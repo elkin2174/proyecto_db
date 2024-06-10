@@ -1,6 +1,7 @@
 package Interfaz;
 
 import Controlador.IServiceC;
+import Modelo.Servicio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,34 +35,43 @@ public class IService extends JFrame {
 
         controlador = new IServiceC();
 
-        controlador.getServiceById(id,lbId,lbOrigen,lbDestination,lbDateRequest,lbTypeTransport,lbNumberPackages,
+        Servicio servicio = controlador.getServiceById(id,lbId,lbOrigen,lbDestination,lbDateRequest,lbTypeTransport,lbNumberPackages,
                 lbDescription,lbStatus, lbStatusDate,lbImage);
+
+
+        changeStatusButton.setEnabled(!controlador.validationFinish(servicio));
+
         changeStatusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser jf = new JFileChooser();
-                jf.setMultiSelectionEnabled(false);
-                Path targetDirectory = Paths.get("src/data");
-                String newNameImage = "nuvonombre" + ".png";
-                if(jf.showOpenDialog(getThis()) == JFileChooser.APPROVE_OPTION){
-                    Path sourceFile = Paths.get(jf.getSelectedFile().toString());
-                    try {
-                        // Verificar si el archivo fuente es un archivo y no un directorio
-                        if (!Files.isRegularFile(sourceFile)) {
-                            return;
-                        }
-                        // Crear el directorio de destino si no existe
-                        if (Files.notExists(targetDirectory)) {
-                            Files.createDirectories(targetDirectory);
-                        }
-                        // Construir la ruta destino del archivo
-                        Path targetFile = targetDirectory.resolve(newNameImage);
-                        // Mover el archivo al directorio destino
-                        Files.copy(sourceFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
+//                JFileChooser jf = new JFileChooser();
+//                jf.setMultiSelectionEnabled(false);
+//                Path targetDirectory = Paths.get("src/data");
+//                String newNameImage = "nuvonombre" + ".png";
+//                if(jf.showOpenDialog(getThis()) == JFileChooser.APPROVE_OPTION){
+//                    Path sourceFile = Paths.get(jf.getSelectedFile().toString());
+//                    try {
+//                        // Verificar si el archivo fuente es un archivo y no un directorio
+//                        if (!Files.isRegularFile(sourceFile)) {
+//                            return;
+//                        }
+//                        // Crear el directorio de destino si no existe
+//                        if (Files.notExists(targetDirectory)) {
+//                            Files.createDirectories(targetDirectory);
+//                        }
+//                        // Construir la ruta destino del archivo
+//                        Path targetFile = targetDirectory.resolve(newNameImage);
+//                        // Mover el archivo al directorio destino
+//                        Files.copy(sourceFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
+//
+//                        controlador.changeStatus(servicio);
+//
+//                    } catch (IOException ex) {
+//                        ex.printStackTrace();
+//                    }
+
+                    controlador.changeStatus(servicio);
+                    changeStatusButton.setEnabled(!controlador.validationFinish(servicio));
 
             }
         });
@@ -69,19 +79,19 @@ public class IService extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controlador.selectStatus(servicio,lbStatus,lbStatusDate,lbImage,0);
             }
         });
         pickedUpByCourierButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controlador.selectStatus(servicio,lbStatus,lbStatusDate,lbImage,1);
             }
         });
         deliveredButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controlador.selectStatus(servicio,lbStatus,lbStatusDate,lbImage,2);
             }
         });
     }
@@ -93,4 +103,5 @@ public class IService extends JFrame {
         IService iService = new IService(id);
         iService.setVisible(true);
     }
+
 }

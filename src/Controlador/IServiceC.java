@@ -24,6 +24,8 @@ public class IServiceC {
         } else {
             mensajeroContext = LoginControlador.getMensajeroContext();
         }
+
+
     }
     public void addService(JTextField origen, JTextField destini, JSpinner numPackage, JSpinner weightPackage,
                            JTextArea descripcion){
@@ -79,7 +81,7 @@ public class IServiceC {
         return "No Asignado";
     }
 
-    public void getServiceById(String id, JLabel lbCodigo, JLabel lbOrigin,JLabel lbDestination, JLabel lbRequeseDate,
+    public Servicio getServiceById(String id, JLabel lbCodigo, JLabel lbOrigin,JLabel lbDestination, JLabel lbRequeseDate,
                                JLabel tipoTranporte, JLabel numPackage,JLabel description, JLabel status, JLabel statusDate,
                                JLabel img) {
         ServicioDAO servicioDAO = new ServicioDAO();
@@ -94,18 +96,44 @@ public class IServiceC {
         status.setText(getEstadoActual(servicio).getEstadoActual());
         statusDate.setText(getEstadoActual(servicio).getFecha().toString());
 
-
+        return servicio;
 //      ImageIcon imageIcon = new ImageIcon("src/data/" + getEstadoActual(servicio).ge);
     }
 
-    public void selectStatus(String id, JLabel statusDate, JLabel img, int indexStatus){
-        ServicioDAO servicioDAO = new ServicioDAO();
-        Servicio servicio = servicioDAO.selectById(id);
-        statusDate.setText(servicio.getEstados().get(indexStatus).getEstadoActual());
-        statusDate.setText(servicio.getEstados().get(indexStatus).getFecha().toString());
+    public void selectStatus(Servicio servicio, JLabel status,JLabel statusDate, JLabel img, int indexStatus){
+        try {
+            statusDate.setText(servicio.getEstados().get(indexStatus).getFecha().toString());
+            status.setText(servicio.getEstados().get(indexStatus).getEstadoActual());
+        }catch (IndexOutOfBoundsException ex){
+            JOptionPane.showMessageDialog(null, "Se encuentra en un estado anterior");
+        }
+
+        //img.setText(servicio.getEstados().get(indexStatus));
     }
 
     public Estado getEstadoActual(Servicio servicio){
         return  servicio.getEstados().get(servicio.getEstados().size()-1);
+    }
+    public boolean validationFinish(Servicio servicio){
+        if(servicio.getEstados().size() == 3){
+            return true;
+        }
+        return false;
+    }
+
+    public void changeStatus(Servicio servicio) {
+        EstadoDAO estadoDAO = new EstadoDAO();
+        if(servicio.getEstados().size() == 1){
+
+            Estado estado = new Estado(EstadoDAO.PICKEDUP,servicio);
+            estadoDAO.insert(estado);
+            servicio.addEstado(estado);
+        }else if(servicio.getEstados().size() == 2){
+            Estado estado = new Estado(EstadoDAO.DELIVERED,servicio);
+            estadoDAO.insert(estado);
+            servicio.addEstado(estado);
+
+        }
+
     }
 }
