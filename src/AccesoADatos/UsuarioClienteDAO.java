@@ -73,7 +73,7 @@ public class UsuarioClienteDAO {
             while (rs.next()) {
                 UsuarioCliente usuarioCliente = new UsuarioCliente();
                 usuarioCliente.setLogin(rs.getString("login"));
-                usuarioCliente.setPassword(rs.getString("contraseña"));
+                usuarioCliente.setPassword(rs.getString("contrasena"));
                 usuarioCliente.setDireccion(rs.getString("direccion"));
                 usuarioCliente.setEmail(rs.getString("email"));
                 usuarioCliente.setTelefono(rs.getString("telefono"));
@@ -107,7 +107,7 @@ public class UsuarioClienteDAO {
                     servicio.setDescripcion(rs.getString("descripcion"));
                     servicio.setCiudad(rs.getString("ciudad"));
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
-                    servicio.setEstados(servicioDAO.selectAllStates(servicio.getCodigo()));
+                    //servicio.setEstados(servicioDAO.selectAllStates(servicio.getCodigo()));
                    // servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
                     servicios.add(servicio);
                 }
