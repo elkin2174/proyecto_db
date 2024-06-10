@@ -63,6 +63,27 @@ public class MensajeroDAO {
         return mensajero;
     }
 
+    public List<Mensajero> selectAllCBClient() {
+        List<Mensajero> mensajeros = new ArrayList<>();
+        try (Connection conn = dbConnection.openConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
+            while (rs.next()) {
+                Mensajero mensajero = new Mensajero();
+                mensajero.setIdentificacion(rs.getString("identificacion"));
+                mensajero.setNombre(rs.getString("nombre"));
+                mensajero.setEmail(rs.getString("email"));
+                mensajero.setDireccion(rs.getString("direccion"));
+                mensajero.setTelefono(rs.getString("telefono"));
+                mensajero.setClientes(selectClientesAsociados(mensajero.getIdentificacion()));
+               // mensajero.setServicios(selectServicios(mensajero.getIdentificacion()));
+                mensajeros.add(mensajero);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mensajeros;
+    }
     public List<Mensajero> selectAll() {
         List<Mensajero> mensajeros = new ArrayList<>();
         try (Connection conn = dbConnection.openConnection();
@@ -76,7 +97,7 @@ public class MensajeroDAO {
                 mensajero.setDireccion(rs.getString("direccion"));
                 mensajero.setTelefono(rs.getString("telefono"));
                 mensajero.setClientes(selectClientesAsociados(mensajero.getIdentificacion()));
-                mensajero.setServicios(selectServicios(mensajero.getIdentificacion()));
+                // mensajero.setServicios(selectServicios(mensajero.getIdentificacion()));
                 mensajeros.add(mensajero);
             }
         } catch (SQLException e) {
@@ -84,6 +105,7 @@ public class MensajeroDAO {
         }
         return mensajeros;
     }
+
 
     public List<Cliente> selectClientesAsociados(String id_mensajero) {
         List<Cliente> clientes = new ArrayList<>();

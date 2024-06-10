@@ -14,6 +14,9 @@ public class IClientC {
 
     private Cliente clienteContext;
 
+    public IClientC(){
+        clienteContext = LoginControlador.getUsuarioContext().getCliente();
+    }
 
     public void addAssociate(JComboBox cbMensajero){
         MensajeroDAO mensajeroDAO = new MensajeroDAO();
@@ -37,7 +40,7 @@ public class IClientC {
     public void cargarTodosMensajero(JComboBox cbMensajeros){
         DefaultComboBoxModel<Object> modelMensajeros = new DefaultComboBoxModel<>();
         MensajeroDAO mensajeroDAO = new MensajeroDAO();
-        List<Mensajero> mensajeros =  mensajeroDAO.selectAll();
+        List<Mensajero> mensajeros =  mensajeroDAO.selectAllCBClient();
         for(Mensajero mensajero : mensajeros){
             modelMensajeros.addElement(mensajero.getIdentificacion() + " - " + mensajero.getNombre());
         }

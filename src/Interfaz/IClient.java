@@ -1,5 +1,6 @@
 package Interfaz;
 
+import AccesoADatos.EstadoDAO;
 import Controlador.IClientC;
 import Controlador.IServiceC;
 import Controlador.LoginControlador;
@@ -62,14 +63,15 @@ public class IClient extends JFrame{
         setLocationRelativeTo(null);
         controler = new IClientC();
         clienteContex = LoginControlador.getUsuarioContext();
+        if(clienteContex.getCliente().getTipoCliente().equals("Person")){
+            jIBrachOffice.setEnabled(false);
+            jICreadUsers.setEnabled(false);
+        }
 
         cardLayout = (CardLayout) cardPanel.getLayout();
         pActiveServices.setLayout(new BoxLayout(pActiveServices, BoxLayout.Y_AXIS));
         pPreviousServices.setLayout(new BoxLayout(pPreviousServices, BoxLayout.Y_AXIS));
 
-
-
-        addPanelActiveServices(clienteContex);
 
         spActiveServices.setViewportView(pActiveServices);
         spPreviousServices.setViewportView(pPreviousServices);
@@ -95,6 +97,7 @@ public class IClient extends JFrame{
         activeServicesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                addPanelServices(clienteContex);
                 cardLayout.show(cardPanel,CARD1);
             }
         });
@@ -105,6 +108,7 @@ public class IClient extends JFrame{
         previousServicesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                addPanelServices(clienteContex);
                 cardLayout.show(cardPanel,CARD3);
             }
         });
@@ -140,13 +144,15 @@ public class IClient extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 IServiceC iServiceC = new IServiceC();
                 iServiceC.addService(txtOriginCity,txtDestinationCity,spNumberPackages,spTotalWeight,txtDescription);
+                clienteContex = LoginControlador.getUsuarioContext();
             }
         });
         associateButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controler.addAssociate(comboBox1);
+                controler.cargarMensajeros(clienteContex.getCliente(),model);
             }
         });
         jIDeliverys.addActionListener(new ActionListener() {
@@ -163,20 +169,22 @@ public class IClient extends JFrame{
      * @TODO
      * Añade los el resumen de los servicios a el scroll panel spPanelActiveServices
      */
-    private void addPanelActiveServices(UsuarioCliente clienteContex) {
+    private void addPanelServices(UsuarioCliente clienteContex) {
         IServiceC iServiceC = new IServiceC();
+        pActiveServices.removeAll();
+        pPreviousServices.removeAll();
         for(Servicio servicio : clienteContex.getServiciosSolicitados()){
             JPanel jp = new IPServices(iServiceC.getEstadoActual(servicio).getEstadoActual(),
                     Integer.toString(servicio.getCodigo()),
                     clienteContex.getCliente().getIdentificacion(),
-                    servicio.getCiudad(),servicio.getDestino(),
-                    clienteContex.getTelefono(),clienteContex.getEmail()).getPanel1();
-            pActiveServices.add(jp);
+                    servicio.getCiudad(), servicio.getDestino(),
+                    clienteContex.getTelefono(), clienteContex.getEmail()).getPanel1();
+            if(!iServiceC.getEstadoActual(servicio).getEstadoActual().equals(EstadoDAO.DELIVERED)) {
+                pActiveServices.add(jp);
+            }else{
+                pPreviousServices.add(jp);
+            }
         }
-    }
-    private void addPanelPreviousServices(){
-        JPanel jp = new IPServices("Hola","Prueba","xd","xd","xd","xd","xd").getPanel1();
-        pPreviousServices.add(jp);
     }
 
     public static void main(String[] args) {
