@@ -107,6 +107,6 @@ public class IServiceC {
     }
 
     public Estado getEstadoActual(Servicio servicio){
-        return  servicio.getEstados().get(servicio.getEstados().size() -1);
+        return  servicio.getEstados().get(servicio.getEstados().size()-1);
     }
 }

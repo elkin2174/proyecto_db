@@ -106,17 +106,16 @@ public class ServicioDAO {
         return servicios;
     }
 
-    public List<Estado> selectAllStates(String codigo_servicio) {
+    public List<Estado> selectAllStates(int codigo_servicio) {
         List<Estado> estados = new ArrayList<>();
         ServicioDAO servicioDAO = new ServicioDAO();
 
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_STATES_SQL)) {
-            stmt.setString(1, codigo_servicio);
+            stmt.setInt(1, codigo_servicio);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Estado estado = new Estado();
-                    estado.setServicio(servicioDAO.selectById(rs.getString("codigo_servicio")));
                     estado.setEstadoActual(rs.getString("estado_actual"));
                     estado.setFecha(rs.getTimestamp("fecha").toLocalDateTime());
                     estados.add(estado);

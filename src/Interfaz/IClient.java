@@ -157,9 +157,9 @@ public class IClient extends JFrame{
      * Añade los el resumen de los servicios a el scroll panel spPanelActiveServices
      */
     private void addPanelActiveServices(UsuarioCliente clienteContex) {
-        int i = 0;
+        IServiceC iServiceC = new IServiceC();
         for(Servicio servicio : clienteContex.getServiciosSolicitados()){
-            JPanel jp = new IPServices(Integer.toString(i),
+            JPanel jp = new IPServices(iServiceC.getEstadoActual(servicio).getEstadoActual(),
                     Integer.toString(servicio.getCodigo()),
                     clienteContex.getCliente().getIdentificacion(),
                     servicio.getCiudad(),servicio.getDestino(),

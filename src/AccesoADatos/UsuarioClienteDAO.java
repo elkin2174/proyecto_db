@@ -84,6 +84,7 @@ public class UsuarioClienteDAO {
 
     public List<Servicio> selectAllServices(String id_usuario) {
         List<Servicio> servicios = new ArrayList<>();
+        ServicioDAO servicioDAO = new ServicioDAO();
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_SERVICES_SQL)) {
 
@@ -99,6 +100,7 @@ public class UsuarioClienteDAO {
                     servicio.setDescripcion(rs.getString("descripcion"));
                     servicio.setCiudad(rs.getString("ciudad"));
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
+                    servicio.setEstados(servicioDAO.selectAllStates(servicio.getCodigo()));
                     servicios.add(servicio);
                 }
             }
