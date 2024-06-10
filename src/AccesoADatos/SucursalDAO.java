@@ -37,6 +37,7 @@ public class SucursalDAO {
 
     public List<Sucursal> selectFromClient(Cliente cliente) {
         List<Sucursal> sucursales = new ArrayList<>();
+
         try (Connection conn = conexion.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_FROM_CLIENT)) {
             stmt.setString(1, cliente.getIdentificacion());

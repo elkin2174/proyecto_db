@@ -54,7 +54,7 @@ public class ServicioDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     servicio = new Servicio();
-                    servicio.setCodigo(Integer.parseInt(rs.getString("codigo")));
+                    servicio.setCodigo(rs.getInt("codigo"));
                     servicio.setNumPaquetes(rs.getInt("numero_paquetes"));
                     servicio.setOrigen(rs.getString("origen"));
                     servicio.setDestino(rs.getString("destino"));
@@ -64,6 +64,7 @@ public class ServicioDAO {
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
                     servicio.setCliente(usuarioClienteDAO.selectById(rs.getString("id_usuario")));
                     servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
+                    servicio.setEstados(selectAllStates(servicio.getCodigo()+""));
                 }
             }
         } catch (SQLException e) {
@@ -81,7 +82,7 @@ public class ServicioDAO {
              ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
             while (rs.next()) {
                 Servicio servicio = new Servicio();
-                servicio.setCodigo(Integer.parseInt(rs.getString("codigo")));
+                servicio.setCodigo(rs.getInt("codigo"));
                 servicio.setNumPaquetes(rs.getInt("numero_paquetes"));
                 servicio.setOrigen(rs.getString("origen"));
                 servicio.setDestino(rs.getString("destino"));
@@ -90,6 +91,7 @@ public class ServicioDAO {
                 servicio.setCiudad(rs.getString("ciudad"));
                 servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
                 servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
+                servicio.setEstados(selectAllStates(servicio.getCodigo()+""));
                 servicios.add(servicio);
             }
         } catch (SQLException e) {
