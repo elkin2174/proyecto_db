@@ -27,7 +27,7 @@ public class LoginControlador {
         UsuarioClienteDAO dao = new UsuarioClienteDAO();
         UsuarioCliente user = dao.selectById(userStr);
 
-        if (user == null) {
+        if (user.getLogin() == null) {
             errorMsg.setText("El usuario no existe");
             return false;
         }
