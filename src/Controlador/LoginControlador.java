@@ -3,6 +3,7 @@ package Controlador;
 import AccesoADatos.UsuarioClienteDAO;
 import AccesoADatos.UsuarioMensajeroDAO;
 import Modelo.Cliente;
+import Modelo.Servicio;
 import Modelo.UsuarioCliente;
 import Modelo.UsuarioMensajero;
 
@@ -25,6 +26,7 @@ public class LoginControlador {
         }
         UsuarioClienteDAO dao = new UsuarioClienteDAO();
         UsuarioCliente user = dao.selectById(userStr);
+
         if (user == null) {
             errorMsg.setText("El usuario no existe");
             return false;
@@ -35,6 +37,9 @@ public class LoginControlador {
         }
         //Aquí se debe guardar el usuario en un estado de la aplicación
         usuarioContext = user;
+        for(Servicio servicio : usuarioContext.getServiciosSolicitados()){
+            System.out.println(servicio.getCodigo());
+        }
         return true;
     }
 

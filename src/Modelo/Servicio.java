@@ -26,19 +26,8 @@ public class Servicio {
     } // Constructor vacío
 
     // Constructor con argumentos
-    public Servicio( int codigo, int numPaq, String orgen, String destino, String tipoTrans, String desc, String ciudad, Mensajero men, UsuarioCliente user) {
-        this.numPaquetes = numPaq;
-        this.origen = orgen;
-        this.destino = destino;
-        this.tipoTransporte = tipoTrans;
-        this.descripcion = desc;
-        this.ciudad = ciudad;
-        this.mensajero = men;
-        this.cliente = user;
-        this.fechaSolicitud = LocalDateTime.now();
-        this.estados = new ArrayList<>();
-    }
-    public Servicio( int numPaq, String origen, String destino, String tipoTrans, String desc, String ciudad, Mensajero men, UsuarioCliente user) {
+    public Servicio( int codigo, int numPaq, String origen, String destino, String tipoTrans, String desc, String ciudad, Mensajero men, UsuarioCliente user) {
+        this.codigo = codigo;
         this.numPaquetes = numPaq;
         this.origen = origen;
         this.destino = destino;
@@ -51,12 +40,11 @@ public class Servicio {
         this.estados = new ArrayList<>();
     }
 
-
     public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(int  codigo) {
         this.codigo = codigo;
     }
 

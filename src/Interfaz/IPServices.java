@@ -27,7 +27,7 @@ public class IPServices extends JPanel{
         viewDetailsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                IService.main(new String[]{});
+                IService.main(new String[]{},lbId.getText());
             }
         });
     }

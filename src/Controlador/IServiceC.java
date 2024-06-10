@@ -1,5 +1,6 @@
 package Controlador;
 
+import AccesoADatos.EstadoDAO;
 import AccesoADatos.ServicioDAO;
 import Interfaz.IService;
 import Modelo.*;
@@ -29,16 +30,26 @@ public class IServiceC {
     public void addService(JTextField origen, JTextField destini, JSpinner numPackage, JSpinner weightPackage,
                            JTextArea descripcion){
         ServicioDAO servicioDAO = new ServicioDAO();
-        Servicio servicio = new Servicio((int) numPackage.getValue(),
+        Servicio servicio = new Servicio((ServicioDAO.codigo + 1),(int) numPackage.getValue(),
                 origen.getText(),
                 destini.getText(),
-                getTipoTranporte((int)numPackage.getValue(),weightPackage),
+                getTipoTranporte((int) numPackage.getValue(), weightPackage),
                 descripcion.getText(),
                 origen.getText(),
                 getMensajero(),
                 usuarioContext
         );
         servicioDAO.insert(servicio);
+        try {
+            EstadoDAO estadoDAO = new EstadoDAO();
+            Estado estado = new Estado(EstadoDAO.REQUIERED,servicio);
+            estadoDAO.insert(estado);
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+
+
+
         JOptionPane.showMessageDialog(null, "Servicio creado correctamente ");
         origen.setText("");
         destini.setText("");
@@ -50,8 +61,8 @@ public class IServiceC {
     }
 
     private Mensajero getMensajero() {
-        int random = (int) Math.floor(Math.random()*(usuarioContext.getCliente().getMensajeros().size()+1)
-                + usuarioContext.getCliente().getMensajeros().size());
+        int random = (int) Math.floor(Math.random()*(usuarioContext.getCliente().getMensajeros().size())
+                + usuarioContext.getCliente().getMensajeros().size() - 1 );
         System.out.println(random);
         return usuarioContext.getCliente().getMensajeros().get(random);
     }

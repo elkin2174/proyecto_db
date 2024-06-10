@@ -3,30 +3,35 @@ package AccesoADatos;
 import Modelo.Estado;
 import Modelo.Servicio;
 import Modelo.UsuarioCliente;
-import Modelo.UsuarioMensajero;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServicioDAO {
+
+    public static int codigo;
     private static final String INSERT_SQL = "INSERT INTO servicio (numero_paquetes, origen, destino, tipo_transporte, descripcion, ciudad, fecha_solicitud, id_mensajero, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM servicio WHERE codigo = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM servicio";
     private static final String SELECT_STATES_SQL = "SELECT * FROM estado WHERE codigo_servicio = ?";
     private static final String UPDATE_SQL = "UPDATE servicio SET numero_paquetes = ?, origen = ?, destino = ?, tipo_transporte = ?, descripcion = ?, ciudad = ?, fecha_solicitud = ?, id_mensajero = ?, id_usuario = ? WHERE codigo = ?";
     private static final String DELETE_SQL = "DELETE FROM servicio WHERE codigo = ?";
+    private static final String SELECT_MAX_ID_SQL = "SELECT MAX(codigo) as codigo FROM servicio";
 
     private DBConnection dbConnection;
 
     public ServicioDAO() {
         this.dbConnection = new DBConnection();
+        codigo = getLastID();
     }
 
     public void insert(Servicio servicio) {
+        MensajeroDAO mensajeroDAO = new MensajeroDAO();
+        UsuarioClienteDAO usuarioClienteDAO = new UsuarioClienteDAO();
+
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
-
             stmt.setInt(1, servicio.getNumPaquetes());
             stmt.setString(2, servicio.getOrigen());
             stmt.setString(3, servicio.getDestino());
@@ -36,7 +41,9 @@ public class ServicioDAO {
             stmt.setTimestamp(7, Timestamp.valueOf(servicio.getFechaSolicitud()));
             stmt.setString(8, servicio.getMensajero().getIdentificacion());
             stmt.setString(9, servicio.getCliente().getLogin());
+            codigo++;
             stmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,7 +57,7 @@ public class ServicioDAO {
 
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
-            stmt.setString(1, codigo);
+            stmt.setInt(1, Integer.parseInt(codigo));
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     servicio = new Servicio();
@@ -97,6 +104,7 @@ public class ServicioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return servicios;
     }
 
@@ -149,6 +157,19 @@ public class ServicioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public int getLastID(){
+        try (Connection conn = dbConnection.openConnection();
+             Statement stmt = conn.createStatement()) {
+            try (ResultSet rs = stmt.executeQuery(SELECT_MAX_ID_SQL)) {
+                while (rs.next()) {
+                    return rs.getInt("codigo");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
 

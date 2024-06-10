@@ -1,5 +1,7 @@
 package Interfaz;
 
+import Controlador.IServiceC;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,12 +24,18 @@ public class IService extends JFrame {
     private JButton requiredButton;
     private JButton pickedUpByCourierButton;
     private JButton deliveredButton;
+    private IServiceC controlador;
 
-    public IService()  {
+    public IService(String id)  {
         super("Client Interfaz");
         setContentPane(panel1);
         setSize(600, 400);
         setLocationRelativeTo(null);
+
+        controlador = new IServiceC();
+
+        controlador.getServiceById(id,lbId,lbOrigen,lbDestination,lbDateRequest,lbTypeTransport,lbNumberPackages,
+                lbDescription,lbStatus, lbStatusDate,lbImage);
         changeStatusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,8 +89,8 @@ public class IService extends JFrame {
         return this;
     }
 
-    public static void main(String[] args) {
-        IService iService = new IService();
+    public static void main(String[] args, String id) {
+        IService iService = new IService(id);
         iService.setVisible(true);
     }
 }
