@@ -1,5 +1,6 @@
 package Controlador;
 
+import AccesoADatos.ClienteDAO;
 import AccesoADatos.UsuarioClienteDAO;
 import Modelo.Cliente;
 import Modelo.UsuarioCliente;
@@ -10,6 +11,7 @@ import java.util.regex.Pattern;
 
 public class CreateUserClientC {
     public static UsuarioClienteDAO usuarioClienteDAO = new UsuarioClienteDAO();
+    public static UsuarioCliente usuarioClienteContext = LoginControlador.getUsuarioContext();
 
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
@@ -37,8 +39,7 @@ public class CreateUserClientC {
         }
         else {
             // Crear usuario
-            Cliente cliente = new Cliente();
-            cliente.setIdentificacion(""); // TEMPORAL PARA AÑADIR ALGÚN CLIENTE
+            Cliente cliente = usuarioClienteContext.getCliente();
             UsuarioCliente user = new UsuarioCliente(username, password, direccion, email, "", cliente);
             if (usuarioClienteDAO.insert(user) == 0) {
                 JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
