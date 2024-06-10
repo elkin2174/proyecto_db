@@ -13,7 +13,7 @@ public class EstadoDAO {
     public static final String PICKEDUP = "PickUp";
     public static final String DELIVERED = "Deliverd";
 
-    private static final String INSERT_SQL = "INSERT INTO estado (fecha,codigo_servicio,estado_actual, foto) VALUES (?,?, ?,?)";
+    private static final String INSERT_SQL = "INSERT INTO estado (fecha,codigo_servicio,estado_actual, foto) VALUES (?,?,?,?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM estado WHERE codigo_servicio = ? AND estado_actual = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM estado";
     private static final String DELETE_SQL = "DELETE FROM estado WHERE codigo_servicio = ? AND estado_actual = ?";
