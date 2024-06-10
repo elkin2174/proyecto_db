@@ -122,6 +122,12 @@ public class IClient extends JFrame{
                 spTotalWeight.setValue(0);
             }
         });
+        jIBrachOffice.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IBranchOffice.main(new String[]{});
+            }
+        });
         addServiceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
