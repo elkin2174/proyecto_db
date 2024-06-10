@@ -121,6 +121,7 @@ public class IServiceC {
     public Estado getEstadoActual(Servicio servicio){
         return  servicio.getEstados().get(servicio.getEstados().size()-1);
     }
+
     public boolean validationFinish(Servicio servicio){
         if(servicio.getEstados().size() == 3){
             return true;

@@ -60,7 +60,7 @@ public class LoginControlador {
         UsuarioMensajeroDAO dao = new UsuarioMensajeroDAO();
         UsuarioMensajero user = dao.selectByLogin(userStr);
 
-        if (user == null) {
+        if (user.getLogin() == null) {
             errorMsg.setText("El usuario no existe");
             return false;
         }
