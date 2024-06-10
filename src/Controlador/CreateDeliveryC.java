@@ -38,17 +38,6 @@ public class CreateDeliveryC {
         String CPassword = String.valueOf(tfCPassword.getPassword());
         String username = tfUsername.getText();
 
-        // Vaciar campos
-        tfId.setText("");
-        tfNombre.setText("");
-        tfApellido.setText("");
-        tfEmail.setText("");
-        tfDireccion.setText("");
-        tfTelefono.setText("");
-        tfPassword.setText("");
-        tfCPassword.setText("");
-        tfUsername.setText("");
-
         // Verificaciones
         if (id == "") {
             tfId.setText("Es obligatorio poner la identificación");
@@ -80,6 +69,17 @@ public class CreateDeliveryC {
                 JOptionPane.showMessageDialog(null, "Username ya existe, debe crear uno nuevo");
                 return false;
             }
+
+            // Vaciar campos
+            tfId.setText("");
+            tfNombre.setText("");
+            tfApellido.setText("");
+            tfEmail.setText("");
+            tfDireccion.setText("");
+            tfTelefono.setText("");
+            tfPassword.setText("");
+            tfCPassword.setText("");
+            tfUsername.setText("");
 
             JOptionPane.showMessageDialog(null, "Mensajero creado exitosamente");
 
