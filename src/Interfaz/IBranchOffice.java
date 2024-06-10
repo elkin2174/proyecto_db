@@ -1,5 +1,8 @@
 package Interfaz;
 
+import Controlador.BranchOfficeC;
+import Modelo.Sucursal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,9 +32,10 @@ public class IBranchOffice extends JFrame{
 
         cardLayout = (CardLayout) cardPanel.getLayout();
         pBranchOffice.setLayout(new BoxLayout(pBranchOffice, BoxLayout.Y_AXIS));
-        for (int i = 0; i < 30 ; i++) {
-            addBranchOffice();
 
+        pBranchOffice.removeAll();
+        for (Sucursal surcursal : BranchOfficeC.getBranchOffices()) {
+            addBranchOffice(surcursal.getNombre(), surcursal.getDireccion(), surcursal.getTelefono());
         }
 
         spBranchOfficce.setViewportView(pBranchOffice);
@@ -41,13 +45,17 @@ public class IBranchOffice extends JFrame{
         branchOfficesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel,"card1");
+                pBranchOffice.removeAll();
+                for (Sucursal surcursal : BranchOfficeC.getBranchOffices()) {
+                    addBranchOffice(surcursal.getNombre(), surcursal.getDireccion(), surcursal.getTelefono());
+                }
+                cardLayout.first(cardPanel);
             }
         });
         addNewBranchOfficeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel,"card2");
+                cardLayout.last(cardPanel);
             }
         });
         closeButton.addActionListener(new ActionListener() {
@@ -59,7 +67,10 @@ public class IBranchOffice extends JFrame{
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean fue_exitoso = BranchOfficeC.createBranchOffice(txtName, txtAddres, txtPhoneNumber);
+                if (!fue_exitoso) {
 
+                }
             }
         });
         cancelButton.addActionListener(new ActionListener() {
@@ -71,11 +82,11 @@ public class IBranchOffice extends JFrame{
             }
         });
     }
-    public void addBranchOffice(){
-        JPanel jp = new IPBranchOffice("xd","xd","xd").getPanel();
+
+    public void addBranchOffice(String name, String address, String phone){
+        JPanel jp = new IPBranchOffice(name, address, phone).getPanel();
         pBranchOffice.add(jp);
     }
-
 
     public static void main(String[] args) {
         IBranchOffice iBranchOffice = new IBranchOffice();
