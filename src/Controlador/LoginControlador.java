@@ -29,12 +29,11 @@ public class LoginControlador {
         UsuarioClienteDAO dao = new UsuarioClienteDAO();
         UsuarioCliente user = dao.selectById(userStr);
 
-        //System.out.println(user.getLogin() + user.getPassword() + user.getDireccion());
-
         if (user.getLogin() == null) {
             errorMsg.setText("El usuario no existe");
             return false;
         }
+
         if (!user.getPassword().equals(passStr)) {
             errorMsg.setText("Contraseña incorrecta");
             return false;
