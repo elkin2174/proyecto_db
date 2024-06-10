@@ -120,7 +120,7 @@ public class MensajeroDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Servicio servicio = new Servicio();
-                    servicio.setCodigo(Integer.parseInt(rs.getString("codigo")));
+                    servicio.setCodigo(rs.getInt("codigo"));
                     servicio.setNumPaquetes(rs.getInt("numero_paquetes"));
                     servicio.setOrigen(rs.getString("origen"));
                     servicio.setDestino(rs.getString("destino"));
@@ -128,7 +128,7 @@ public class MensajeroDAO {
                     servicio.setDescripcion(rs.getString("descripcion"));
                     servicio.setCiudad(rs.getString("ciudad"));
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
-                    servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
+                    //servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
                     servicios.add(servicio);
                 }
             }

@@ -6,9 +6,14 @@ import Modelo.Servicio;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 public class EstadoDAO {
-    private static final String INSERT_SQL = "INSERT INTO estado (fecha, estado_actual, foto, codigo_servicio) VALUES (?, ?, ?, ?)";
+    public static final String REQUIERED = "Requiered";
+    public static final String PICKEDUP = "Pick by Delivery";
+    public static final String DELIVERED = "Deliverd";
+
+    private static final String INSERT_SQL = "INSERT INTO estado (fecha,codigo_servicio,estado_actual, foto) VALUES (?,?, ?,?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM estado WHERE codigo_servicio = ? AND estado_actual = ?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM estado";
     private static final String DELETE_SQL = "DELETE FROM estado WHERE codigo_servicio = ? AND estado_actual = ?";
@@ -23,8 +28,9 @@ public class EstadoDAO {
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
             stmt.setTimestamp(1, Timestamp.valueOf(estado.getFecha()));
-            stmt.setString(2, estado.getEstadoActual());
-            stmt.setString(4, estado.getServicio().getCodigo()+"");
+            stmt.setInt(2, estado.getServicio().getCodigo());
+            stmt.setString(3, estado.getEstadoActual());
+            stmt.setString(4,"Imagen");
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
