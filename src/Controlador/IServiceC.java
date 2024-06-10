@@ -11,6 +11,7 @@ import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Random;
 
 public class IServiceC {
 
@@ -64,10 +65,14 @@ public class IServiceC {
     }
 
     private Mensajero getMensajero() {
-        int random = (int) Math.floor(Math.random()*(usuarioContext.getCliente().getMensajeros().size())
-                + usuarioContext.getCliente().getMensajeros().size() - 1 );
-        System.out.println(random);
-        return usuarioContext.getCliente().getMensajeros().get(random);
+        Random random = new Random();
+        try {
+            int indiceAleatorio = random.nextInt(usuarioContext.getCliente().getMensajeros().size());
+            return usuarioContext.getCliente().getMensajeros().get(indiceAleatorio);
+        }catch (IndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null,"No hay mensajeros asociados");
+            return null;
+        }
     }
 
     private String getTipoTranporte(int numberPackege, JSpinner weightPackage) {
