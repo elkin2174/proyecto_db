@@ -15,6 +15,7 @@ public class ClienteDAO {
     private static final String UPDATE_SQL = "UPDATE cliente SET tipo_cliente = ?, nombre = ?, email = ?, ciudad = ?, direccion = ?, telefono = ? WHERE identificacion = ?";
     private static final String DELETE_SQL = "DELETE FROM cliente WHERE identificacion = ?";
     private static final String INSERT_MENSAJERO_SQL = "INSERT INTO asociado (id_cliente, id_mensajero) VALUES (?,?)";
+
     DBConnection conexion;
 
     public ClienteDAO() {
@@ -166,7 +167,6 @@ public class ClienteDAO {
                     usuarioCliente.setDireccion(rs.getString("direccion"));
                     usuarioCliente.setEmail(rs.getString("email"));
                     usuarioCliente.setTelefono(rs.getString("telefono"));
-                    usuarioCliente.setServiciosSolicitados(usuarioClienteDAO.selectAllServices(usuarioCliente.getLogin()));
                     usuarios.add(usuarioCliente);
                 }
             }

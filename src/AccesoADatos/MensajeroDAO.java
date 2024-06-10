@@ -111,7 +111,8 @@ public class MensajeroDAO {
 
     public List<Servicio> selectServicios(String id_mensajero) {
         List<Servicio> servicios = new ArrayList<>();
-        MensajeroDAO mensajeroDAO = new MensajeroDAO();
+        UsuarioClienteDAO usuarioClienteDAO = new UsuarioClienteDAO();
+        ServicioDAO servicioDAO = new ServicioDAO();
 
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_SERVICES_SQL)) {
@@ -128,7 +129,8 @@ public class MensajeroDAO {
                     servicio.setDescripcion(rs.getString("descripcion"));
                     servicio.setCiudad(rs.getString("ciudad"));
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
-                    //servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
+                    servicio.setCliente(usuarioClienteDAO.selectById(rs.getString("id_usuario")));
+                    servicio.setEstados(servicioDAO.selectAllStates(rs.getString("codigo")));
                     servicios.add(servicio);
                 }
             }

@@ -40,6 +40,7 @@ public class EstadoDAO {
     public Estado selectById(String codigoServicio, String estadoActual) {
         Estado estado = null;
         ServicioDAO servicioDAO = new ServicioDAO();
+
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
             stmt.setString(1, codigoServicio);

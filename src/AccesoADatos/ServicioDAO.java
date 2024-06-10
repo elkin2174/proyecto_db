@@ -71,6 +71,7 @@ public class ServicioDAO {
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
                     servicio.setCliente(usuarioClienteDAO.selectById(rs.getString("id_usuario")));
                     servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
+                    servicio.setEstados(selectAllStates(servicio.getCodigo()+""));
                 }
             }
         } catch (SQLException e) {
@@ -97,6 +98,7 @@ public class ServicioDAO {
                 servicio.setCiudad(rs.getString("ciudad"));
                 servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
                 servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
+                servicio.setEstados(selectAllStates(servicio.getCodigo()+""));
                 servicios.add(servicio);
             }
         } catch (SQLException e) {

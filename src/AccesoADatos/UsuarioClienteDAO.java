@@ -42,6 +42,7 @@ public class UsuarioClienteDAO {
     public UsuarioCliente selectById(String login) {
         UsuarioCliente usuarioCliente = new UsuarioCliente();
         ClienteDAO clienteDAO = new ClienteDAO();
+
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
             stmt.setString(1, login);
@@ -64,6 +65,8 @@ public class UsuarioClienteDAO {
 
     public List<UsuarioCliente> selectAll() {
         List<UsuarioCliente> usuariosCliente = new ArrayList<>();
+        ClienteDAO clienteDAO = new ClienteDAO();
+
         try (Connection conn = dbConnection.openConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL)) {
@@ -74,6 +77,8 @@ public class UsuarioClienteDAO {
                 usuarioCliente.setDireccion(rs.getString("direccion"));
                 usuarioCliente.setEmail(rs.getString("email"));
                 usuarioCliente.setTelefono(rs.getString("telefono"));
+                usuarioCliente.setCliente(clienteDAO.selectById(rs.getString("id_cliente")));
+                usuarioCliente.setServiciosSolicitados(selectAllServices(usuarioCliente.getLogin()));
                 usuariosCliente.add(usuarioCliente);
             }
         } catch (SQLException e) {
@@ -85,6 +90,8 @@ public class UsuarioClienteDAO {
     public List<Servicio> selectAllServices(String id_usuario) {
         List<Servicio> servicios = new ArrayList<>();
         ServicioDAO servicioDAO = new ServicioDAO();
+        MensajeroDAO mensajeroDAO = new MensajeroDAO();
+
         try (Connection conn = dbConnection.openConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_SERVICES_SQL)) {
 
@@ -101,6 +108,7 @@ public class UsuarioClienteDAO {
                     servicio.setCiudad(rs.getString("ciudad"));
                     servicio.setFechaSolicitud(rs.getTimestamp("fecha_solicitud").toLocalDateTime());
                     servicio.setEstados(servicioDAO.selectAllStates(servicio.getCodigo()));
+                    servicio.setMensajero(mensajeroDAO.selectById(rs.getString("id_mensajero")));
                     servicios.add(servicio);
                 }
             }
