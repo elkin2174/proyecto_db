@@ -23,6 +23,7 @@ public class BranchOfficeC {
         String _name = name.getText();
         String _address = address.getText();
         String _phone = phone.getText();
+        if (_name.isEmpty() || _address.isEmpty() || _phone.isEmpty()) return false;
         Cliente cliente = LoginControlador.getUsuarioContext().getCliente();
         SucursalDAO dao = new SucursalDAO();
         Sucursal sucursal = new Sucursal(0, _name, _address, _phone, cliente);

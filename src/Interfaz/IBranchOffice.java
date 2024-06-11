@@ -68,8 +68,10 @@ public class IBranchOffice extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean fue_exitoso = BranchOfficeC.createBranchOffice(txtName, txtAddres, txtPhoneNumber);
-                if (!fue_exitoso) {
-                    JOptionPane.showMessageDialog(null, "xd");
+                if (fue_exitoso) {
+                    JOptionPane.showMessageDialog(null, "Creada correctamente");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Hubo un error al crearse");
                 }
             }
         });
